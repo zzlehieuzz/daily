@@ -42,13 +42,19 @@ class Utility
     }
 
     /**
-     * Y-m-d H:i:sのフォーマットで今日日付を作成する
-     *
      * @return bool|string
      */
     public static function dbDate()
     {
         return self::createDate(Constant::C_YMD_HIS_DB);
+    }
+
+    /**
+     * @return bool|string
+     */
+    public static function uiDate()
+    {
+        return self::createDate(Constant::C_YMD_DB);
     }
 
     /**

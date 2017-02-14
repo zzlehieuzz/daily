@@ -26,144 +26,150 @@ class DailyController extends AppController
     public function index()
     {
         $aryField = [
-            'id' => 'Users.id',
-            'username' => 'Users.username',
-            'name' => 'Users.name',
-            'login_date' => 'Users.login_date'
+            'id' => 'Daily.id',
+            'date_y_m' => 'Daily.date_y_m',
+            'category_id' => 'Daily.category_id',
+            'amount' => 'SUM(Daily.amount)'
         ];
+        $aryCategory = $this->Category->find('list', ['order' => ['created' => 'DESC']])->toArray();
+        $aryDaily = $this->Daily->find('all', ['order' => ['Daily.date_y_m' => 'DESC']])
+        ->group(['Daily.date_y_m'])
+        ->group(['Daily.category_id'])
+        ->select($aryField)
+        ->where(['Daily.user_id' => self::$m_aryUser['id']])
+        ->toArray();
 
-        $aryUser = $this->Users->find('all', ['order' => ['Users.created' => 'ASC']])->select($aryField)->toArray();
+        $aryData = [];
+        foreach($aryDaily as $aryDailyItem) {
+            if(isset($aryData[$aryDailyItem['date_y_m']][$aryDailyItem['category_id']])) {
+                $aryData[$aryDailyItem['date_y_m']][$aryDailyItem['category_id']] += $aryDailyItem['amount'];
+            } else {
+                $aryData[$aryDailyItem['date_y_m']][$aryDailyItem['category_id']] = $aryDailyItem['amount'];
+            }
+        }
 
-        $this->set('aryUser', $aryUser);
+        $this->set('aryData', $aryData);
+        $this->set('aryCategory', $aryCategory);
     }
 
     /**
-     * ユーザー追加アクション
-     *
      * @return \Cake\Network\Response|null
      */
     public function add()
     {
-        $aryError = [];
-        $objEntityUser = NULL;
+        $aryCategory = $this->Category->find('list', ['order' => ['sort' => 'ASC', 'created' => 'DESC']])->toArray();
+
         if ($this->request->is('post')) {
             $aryData = $this->request->data;
-            if (isset($aryData['name']) == TRUE && $aryData['name']) {
-                $strName = preg_replace('[ |　|	]', '', $aryData['name']);
-                if ($strName == '') {
-                    $aryData['name'] = '';
-                }
-            }
+            $objEntity = $this->Daily->newEntity($aryData);
 
-            if (isset($aryData['role']) == TRUE) {
-                $aryData['role'] = Constant::C_USER_ROLE_ADMIN;
-            }
-            $objEntityUser = $this->Users->newEntity($aryData);
+            if (count($objEntity->errors()) == 0) {
+                $objEntity->user_id = self::$m_aryUser['id'];
+                $objEntity->date_y_m = $objEntity->date_process;
 
-            if (count($aryError) == 0 && count($objEntityUser->errors()) == 0) {
-                $this->Users->save($objEntityUser);
-                $this->successFlash(__('正常に保存されました'));
-                return $this->redirect(array('action' => 'index'));
+                $this->Daily->save($objEntity);
+                $this->successFlash(__('Successfully saved'));
+                return $this->redirect(['action' => 'add']);
             } else {
-                $aryError[] = Utility::getErrors($objEntityUser->errors());
-                if (count($aryError) > 0) {
+                $aryError = Utility::getErrors($objEntity->errors());
+                if(count($aryError) > 0) {
                     $this->errorFlash($aryError);
-                }
-            }
-        }
-        $this->set('objEntityUser', $objEntityUser);
-    }
-
-    /**
-     * ユーザー編集アクション
-     * @param null $intId ：ユーザーID
-     * @return \Cake\Network\Response|null
-     */
-    public function edit($intId = NULL)
-    {
-        $objUser = NULL;
-        // ユーザーレコードー
-        $objEntityUser = NULL;
-        // エラー管理配列
-        $aryError = [];
-        // メニュー表示
-        $aryBreadcrumb = ['業務連絡一覧' => '/indication/index', 'ユーザー編集画面' => FALSE];
-        // ユーザーIDがない？
-        if ($intId == NULL) {
-            $this->errorFlash(__('ユーザーが存在しません'));
-            // 表示ページへ遷移
-            return $this->redirect(array('action' => 'index'));
-        }
-
-        // ユーザーデータ取得
-        $objUser = $this->Users->find()->where(['id' => $intId, 'deleted' => Constant::C_OFF])->first();
-        // 取得できない？
-        if ($objUser == NULL) {
-            $this->errorFlash(__('ユーザーが存在しません'));
-            // 表示ページへ遷移
-            return $this->redirect(array('action' => 'index'));
-        }
-        // ポストデータがある？
-        if ($this->request->is('post') || $this->request->is('put')) {
-            // ポストデータを取得
-            $aryData = $this->request->data;
-            // パスワード修正しなければ、除く
-            if ($aryData['password'] == '') {
-                unset($aryData['password']);
-            }
-            // 氏名の入力がある？
-            if (isset($aryData['name']) == TRUE && $aryData['name']) {
-                $strName = preg_replace('[ |　|	]', '', $aryData['name']);
-                if ($strName == '') {
-                    $aryData['name'] = '';
-                }
-            }
-            // 連絡先の選択がある？
-            if (isset($aryData['renrakusaki_list']) == TRUE) {
-                $aryData['renrakusaki_list'] = implode(',', array_keys($aryData['renrakusaki_list']));
-            } else {
-                $aryData['renrakusaki_list'] = '';
-            }
-            // 物件インポート権限がある？
-            if (isset($aryData['is_bukken_import']) == TRUE) {
-                $aryData['is_bukken_import'] = Constant::C_ON;
-            } else {
-                $aryData['is_bukken_import'] = Constant::C_OFF;
-            }
-            // レコードー作成
-            $objEntityUser = $this->Users->newEntity($aryData, ['validate' => 'editUsers']);
-            // 整合性チェック
-            if (count($aryError) == 0 && count($objEntityUser->errors()) == 0) {
-                // 保存
-                $this->Users->save($objEntityUser);
-                // 成功メッセージ設定
-                $this->successFlash(__('正常に保存されました'));
-                // 表示ページへ遷移
-                return $this->redirect(array('action' => 'index'));
-            } else {
-                // 整合性チェックのエラーを追加
-                $aryError[] = Utility::getErrors($objEntityUser->errors());
-                if (count($aryError) > 0) {
-                    // エラーメッセージ設定
-                    $this->errorFlash($aryError);
-                    // ユーザーが入力されたデータを設定
-                    $objEntityUser->username = $objUser->username;
-                    $objUser = $objEntityUser;
                 }
             }
         } else {
-            // ユーザーのデータをフォームに設定する
-            $this->request->data = $objUser;
-            unset($this->request->data['password']);
+            $objEntity = $this->Daily->newEntity([
+                'date_process' => Utility::uiDate(),
+                'amount' => 1
+            ]);
         }
 
-        // 連絡先取得
-        $aryRenrakusaki = $this->Renrakusaki->find('all', array('order' => array('created' => 'DESC')))->toArray();
-        // 部署取得
-        $aryDepartment = $this->Department->find('list', array('order' => array('created' => 'DESC')))->toArray();
-        // ビューアーに渡す
-        $this->set(compact('objUser', 'aryRenrakusaki', 'aryDepartment', 'aryBreadcrumb'));
-        $this->set('_serialize', ['objUser', 'aryRenrakusaki', 'aryDepartment', 'aryBreadcrumb']);
+        $this->set('aryCategory', $aryCategory);
+        $this->set('objEntity', $objEntity);
+    }
+
+    /**
+     * @param null $strDateYM
+     * @return \Cake\Network\Response|null
+     */
+    public function edit($strDateYM = NULL)
+    {
+        $aryField = [
+            'id' => 'Daily.id',
+            'date_y_m' => 'Daily.date_y_m',
+            'date_process' => 'Daily.date_process',
+            'category_id' => 'Daily.category_id',
+            'amount' => 'Daily.amount'
+        ];
+
+        $objEntity = null;
+
+        $aryCategory = $this->Category->find('list', ['order' => ['created' => 'DESC']])->toArray();
+        $aryDaily = $this->Daily->find('all', ['order' => ['Daily.date_process' => 'DESC']])
+            ->select($aryField)
+            ->where(['Daily.user_id' => self::$m_aryUser['id']])
+            ->where(['Daily.date_y_m' => $strDateYM])
+            ->toArray();
+
+        if($this->request->is('post')) {
+            $aryData = $this->request->data;
+            $aryData['user_id'] = self::$m_aryUser['id'];
+            $objEntity = $this->Daily->newEntity($aryData);
+
+            if (count($objEntity->errors()) == 0) {
+                $intUser = $this->Daily->find()->where(['id' => $aryData['id'], 'user_id' => self::$m_aryUser['id']])->count();
+                if ($intUser <= 0) {
+                    $this->errorFlash(['Data not found']);
+                } else {
+                    $objEntity->date_y_m = $objEntity->date_process;
+
+                    $this->Daily->save($objEntity);
+                    $this->successFlash(__('Successfully saved'));
+                    return $this->redirect(['action' => 'edit/' . $strDateYM]);
+                }
+            } else {
+                $aryError = Utility::getErrors($objEntity->errors());
+                if(count($aryError) > 0) {
+                    $this->errorFlash($aryError);
+                }
+            }
+        }
+
+        $this->set('objEntity', $objEntity);
+        $this->set('aryData', $aryDaily);
+        $this->set('aryCategory', $aryCategory);
+        $this->set('strDateYM', $strDateYM);
+    }
+
+    public function loadToEdit()
+    {
+        $this->autoRender = FALSE;
+        $aryDaily = [];
+        $intId = $this->request->query('int_Id');
+        if($intId) {
+            $aryDaily = $this->Daily->find()
+                ->where(['id' => $intId, 'user_id' => self::$m_aryUser['id']])
+                ->first()->toArray();
+        }
+
+        return $this->jsonResponse($aryDaily, TRUE);
+    }
+
+    public function processEdit()
+    {
+        $this->autoRender = FALSE;
+        $aryDaily = [];
+        $intId = $this->request->param('int_Id');
+        if($this->request->is('post') && $intId) {
+
+
+
+
+//            $aryDaily = $this->Daily->find()
+//                ->where(['id' => $intId, 'user_id' => self::$m_aryUser['id']])
+//                ->first()->toArray();
+        }
+
+        return $this->jsonResponse($aryDaily, TRUE);
     }
 
     /**

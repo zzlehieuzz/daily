@@ -2,6 +2,46 @@
     margin: 10px 0 10px;
 }
 
+.panel-heading {
+    padding: 5px 15px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.panel-body {
+    padding: 8px 15px;
+}
+
+.panel-footer {
+    padding: 5px 10px;
+}
+
 #title-header {
     display: none;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+.display-none {
+    display: none;
+}
+
+#process-content {
+    z-index: 9999999999999;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0.2;
+    display: none;
+    background: black url("../img/loading.gif") no-repeat center center / 6rem 6rem;
+    cursor: progress; }
+
+.alert {
+    padding: 5px 10px;
+    margin-bottom: 10px;
 }

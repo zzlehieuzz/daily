@@ -44,6 +44,11 @@ class DailyTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+
+        $this->belongsTo('Category', [
+            'foreignKey' => 'category_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -54,26 +59,16 @@ class DailyTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+        $validator->integer('id')->allowEmpty('id', 'create');
+        $validator ->notEmpty('amount', ['message' => 'Amount is required'])
+            ->add('amount', 'naturalNumber', [
+                'rule' => ['naturalNumber', true],
+                'message' => 'Amount has must be number'
+            ]);
 
-        $validator
-            ->dateTime('date_process')
-            ->allowEmpty('date_process');
+        $validator->notEmpty('Date', ['message' => 'Amount is required']);
 
-        $validator
-            ->requirePresence('content', 'create')
-            ->notEmpty('content');
-
-        $validator
-            ->requirePresence('description', 'create')
-            ->notEmpty('description');
-
-        $validator
-            ->integer('sort')
-            ->requirePresence('sort', 'create')
-            ->notEmpty('sort');
+        $validator->allowEmpty('content');
 
         return $validator;
     }

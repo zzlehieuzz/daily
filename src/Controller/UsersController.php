@@ -87,7 +87,6 @@ class UsersController extends AppController
         // エラー管理配列
         $aryError = [];
         // メニュー表示
-        $aryBreadcrumb = ['業務連絡一覧' => '/indication/index', 'ユーザー編集画面' => FALSE];
         // ユーザーIDがない？
         if ($intId == NULL) {
             $this->errorFlash(__('ユーザーが存在しません'));
@@ -96,7 +95,7 @@ class UsersController extends AppController
         }
 
         // ユーザーデータ取得
-        $objUser = $this->Users->find()->where(['id' => $intId, 'deleted' => Constant::C_OFF])->first();
+        $objUser = $this->Users->find()->where(['id' => $intId])->first();
         // 取得できない？
         if ($objUser == NULL) {
             $this->errorFlash(__('ユーザーが存在しません'));
@@ -118,18 +117,7 @@ class UsersController extends AppController
                     $aryData['name'] = '';
                 }
             }
-            // 連絡先の選択がある？
-            if (isset($aryData['renrakusaki_list']) == TRUE) {
-                $aryData['renrakusaki_list'] = implode(',', array_keys($aryData['renrakusaki_list']));
-            } else {
-                $aryData['renrakusaki_list'] = '';
-            }
-            // 物件インポート権限がある？
-            if (isset($aryData['is_bukken_import']) == TRUE) {
-                $aryData['is_bukken_import'] = Constant::C_ON;
-            } else {
-                $aryData['is_bukken_import'] = Constant::C_OFF;
-            }
+
             // レコードー作成
             $objEntityUser = $this->Users->newEntity($aryData, ['validate' => 'editUsers']);
             // 整合性チェック
@@ -157,13 +145,7 @@ class UsersController extends AppController
             unset($this->request->data['password']);
         }
 
-        // 連絡先取得
-        $aryRenrakusaki = $this->Renrakusaki->find('all', array('order' => array('created' => 'DESC')))->toArray();
-        // 部署取得
-        $aryDepartment = $this->Department->find('list', array('order' => array('created' => 'DESC')))->toArray();
-        // ビューアーに渡す
-        $this->set(compact('objUser', 'aryRenrakusaki', 'aryDepartment', 'aryBreadcrumb'));
-        $this->set('_serialize', ['objUser', 'aryRenrakusaki', 'aryDepartment', 'aryBreadcrumb']);
+        $this->set('objEntityUser', $objUser);
     }
 
     /**

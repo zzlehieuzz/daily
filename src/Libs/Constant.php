@@ -23,6 +23,11 @@ class Constant
     // ログアウト後、遷移ページ
     static $C_ROUTE_LOGOUT_REDIRECT = ['controller' => 'Auth', 'action' => 'login'];
 
+    static $C_USER_ROLE = ['USER', 'ADMIN'];
+
+
+
+
     // 日付フォーマット
     const C_YMD_BR_HI = "Y/m/d \n H:i";
     const C_YMD_HIS = 'Y/m/d H:i:s';

@@ -8,8 +8,10 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $user_id
- * @property \Cake\I18n\Time $date_process
- * @property string $content
+ * @property int $category_id
+ * @property string $date_process
+ * @property string $date_y_m
+ * @property int $amount
  * @property string $description
  * @property int $sort
  * @property \Cake\I18n\Time $created
@@ -30,7 +32,6 @@ class Daily extends Entity
      * @var array
      */
     protected $_accessible = [
-        '*' => true,
-        'id' => false
+        '*' => true
     ];
 }

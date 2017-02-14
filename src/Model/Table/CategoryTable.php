@@ -37,6 +37,10 @@ class CategoryTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->hasMany('Daily', [
+            'foreignKey' => 'category_id'
+        ]);
     }
 
     /**

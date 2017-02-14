@@ -14,18 +14,16 @@
 
     <body>
     <div id="wrapper">
+        <div id="process-content"></div>
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <?= $this->element('_nav_top'); ?>
             <?= $this->element('_nav_left'); ?>
         </nav>
 
         <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 id="header-text" class="page-header">Dashboard</h1>
-                </div>
-            </div>
-            <?= $this->Flash->render() ?>
+            <br>
+            <?= $this->Flash->render('error') ?>
+            <?= $this->Flash->render('success') ?>
             <?= $this->fetch('content') ?>
         </div>
     </div>

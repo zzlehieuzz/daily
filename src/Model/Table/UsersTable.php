@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Table;
 
+use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -59,22 +60,19 @@ class UsersTable extends Table
 
         $validator
             ->requirePresence('username', 'create')
-            ->notEmpty('username');
+            ->notEmpty('username', ['message' => 'Input is necessary']);
 
         $validator
             ->requirePresence('password', 'create')
-            ->notEmpty('password');
+            ->notEmpty('password', ['message' => 'Input is necessary']);
 
         $validator
-            ->allowEmpty('name');
+            ->requirePresence('name', 'create')
+            ->notEmpty('name', ['message' => 'Input is necessary']);
 
         $validator
             ->integer('role')
-            ->allowEmpty('role');
-
-        $validator
-            ->dateTime('login_date')
-            ->allowEmpty('login_date');
+            ->notEmpty('role', ['message' => 'Input is necessary']);
 
         return $validator;
     }
@@ -91,5 +89,10 @@ class UsersTable extends Table
         $rules->add($rules->isUnique(['username']));
 
         return $rules;
+    }
+
+    public function beforeSave($event, $entity){
+        $objHasher = new DefaultPasswordHasher();
+        $entity->password = $objHasher->hash($entity->password);
     }
 }
