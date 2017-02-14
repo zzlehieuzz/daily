@@ -89,15 +89,17 @@ class DailyController extends AppController
 
     /**
      * @param null $strDateYM
+     * @param null $intCategory
      * @return \Cake\Network\Response|null
      */
-    public function edit($strDateYM = NULL)
+    public function edit($strDateYM = NULL, $intCategory = NULL)
     {
         $aryField = [
             'id' => 'Daily.id',
             'date_y_m' => 'Daily.date_y_m',
             'date_process' => 'Daily.date_process',
             'category_id' => 'Daily.category_id',
+            'description' => 'Daily.description',
             'amount' => 'Daily.amount'
         ];
 
@@ -106,9 +108,14 @@ class DailyController extends AppController
         $aryCategory = $this->Category->find('list', ['order' => ['created' => 'DESC']])->toArray();
         $aryDaily = $this->Daily->find('all', ['order' => ['Daily.date_process' => 'DESC']])
             ->select($aryField)
-            ->where(['Daily.user_id' => self::$m_aryUser['id']])
-            ->where(['Daily.date_y_m' => $strDateYM])
-            ->toArray();
+            ->where(['Daily.user_id' => self::$m_aryUser['id']]);
+        if($strDateYM) {
+            $aryDaily->where(['Daily.date_y_m' => $strDateYM]);
+        }
+        if($intCategory) {
+            $aryDaily->where(['Daily.category_id' => $intCategory]);
+        }
+        $aryDaily->toArray();
 
         if($this->request->is('post')) {
             $aryData = $this->request->data;
@@ -138,6 +145,7 @@ class DailyController extends AppController
         $this->set('aryData', $aryDaily);
         $this->set('aryCategory', $aryCategory);
         $this->set('strDateYM', $strDateYM);
+        $this->set('intCategory', $intCategory);
     }
 
     public function loadToEdit()

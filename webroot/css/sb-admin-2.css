@@ -11,7 +11,7 @@ body {
 }
 
 #page-wrapper, #page-wrapper-user {
-  padding: 0 15px;
+  padding: 0 10px;
   min-height: 568px;
   background-color: white;
 }

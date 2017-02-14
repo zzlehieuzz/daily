@@ -19,7 +19,7 @@ class Constant
     static $C_ROUTE_DEFAULT = ['controller' => 'Pages', 'action' => 'home'];
     static $C_ROUTE_LOGIN = ['controller' => 'Auth', 'action' => 'login'];
     // ログイン成功時、遷移ページ
-    static $C_ROUTE_LOGIN_REDIRECT = ['controller' => 'Admin', 'action' => 'home'];
+    static $C_ROUTE_LOGIN_REDIRECT = ['controller' => 'Daily', 'action' => 'index'];
     // ログアウト後、遷移ページ
     static $C_ROUTE_LOGOUT_REDIRECT = ['controller' => 'Auth', 'action' => 'login'];
 

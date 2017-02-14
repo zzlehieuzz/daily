@@ -6,6 +6,12 @@ $(function () {
     $("#header-text").text($("#title-header").text());
 });
 
+function checkToDelete(me) {
+    openPopupConfirm('Delete. Is it OK.');
+    me = $(me);
+    $(me).addClass('deleting');
+}
+
 // AJAXのGETリクエスト
 function apiLoad(requestPath, params, callBackFunc, obj) {
     var error500 = $('#error-url').attr('error-500');

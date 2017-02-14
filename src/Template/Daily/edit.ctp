@@ -1,7 +1,18 @@
+<?= $this->Html->script('daily/add.js') ?>
 <?= $this->Html->script('daily/edit.js') ?>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3>Edit daily</h3>
+        <ul class="nav nav-pills btn-sm">
+            <li>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/index') ?>">List daily</a>
+            </li>
+            <li>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">New daily</a>
+            </li>
+            <li>
+                <a class="btn btn-primary" href="<?= $this->Url->build("/daily/edit/$strDateYM/$intCategory") ?>">Edit daily</a>
+            </li>
+        </ul>
     </div>
     <div class="panel-body">
         <div class="row">
@@ -70,13 +81,15 @@
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th width="25%">date</th>
+            <th width="85">date</th>
             <th>category</th>
             <th>amount</th>
+            <th>description</th>
         </tr>
     </thead>
     <tbody>
         <?php if($aryData): ?>
+            <?php $intAmount = 0 ?>
             <?php foreach ($aryData as $aryDataKey => $aryDataItem): ?>
                 <tr class="daily-row" row-id="<?= $aryDataItem->id ?>">
                     <td><?= h($aryDataItem->date_process) ?></td>
@@ -90,8 +103,24 @@
                             'thousands' => ','
                         ]) ?>
                     </td>
+                    <td><?= h($aryDataItem->description) ?></td>
+                    <?php $intAmount += $aryDataItem->amount ?>
                 </tr>
             <?php endforeach; ?>
+            <tr class="">
+                <td align="right" colspan="2"><strong>Total</strong></td>
+                <td colspan="2">
+                    <strong>
+                        <?= $this->Number->format($intAmount, [
+                            'places' => 0,
+                            'before' => '¥ ',
+                            'escape' => false,
+                            'decimals' => '.',
+                            'thousands' => ','
+                        ]) ?>
+                    </strong>
+                </td>
+            </tr>
         <?php else: ?>
             <tr>
                 <td colspan="3">No data</td>

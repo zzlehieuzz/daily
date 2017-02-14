@@ -1,11 +1,16 @@
 <div class="col-xs-12">
     <?= $this->Form->create($objEntityUser, ['url' => ['action' => $action], 'class' => 'form-horizontal', 'method' => 'post']); ?>
         <div class="form-group">
-            <label class="col-sm-2 control-label"><strong>Username <span class="text-danger">(required)</span></strong></label>
             <?php if ($action === 'edit') : ?>
-                <?= $objEntityUser->username; ?>
+                <label class="col-sm-2 control-label">
+                    <strong>Username</strong>
+                </label>
+                <label class="control-label text-left">
+                    <strong>[ <?= $objEntityUser->username; ?> ]</strong>
+                </label>
                 <?= $this->Form->input('id', ['type' => 'hidden']); ?>
             <?php else : ?>
+                <label class="col-sm-2 control-label"><strong>Username <span class="text-danger">(*)</span></strong></label>
                 <div class="col-sm-10">
                     <?= $this->Form->input('username', [
                         'label' => FALSE,
@@ -18,7 +23,7 @@
             <?php endif; ?>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label"><strong>Name <span class="text-danger">(required)</span></strong></label>
+            <label class="col-sm-2 control-label"><strong>Name <span class="text-danger">(*)</span></strong></label>
             <div class="col-sm-10">
                 <?= $this->Form->input('name', [
                     'error' => FALSE,

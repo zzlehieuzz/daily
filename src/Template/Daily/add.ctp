@@ -1,6 +1,15 @@
 <?= $this->Html->script('daily/add.js') ?>
 <div class="panel panel-default">
-    <div class="panel-heading">Add daily</div>
+    <div class="panel-heading">
+        <ul class="nav nav-pills btn-sm">
+            <li>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/index') ?>">List daily</a>
+            </li>
+            <li>
+                <a class="btn btn-primary" href="<?= $this->Url->build('/daily/add') ?>">New daily</a>
+            </li>
+        </ul>
+    </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-xs-12">

@@ -45,3 +45,11 @@ h1, .h1, h2, .h2, h3, .h3 {
     padding: 5px 10px;
     margin-bottom: 10px;
 }
+
+.he-10 {
+    min-height: 10px;
+}
+
+#page-wrapper, #page-wrapper-user {
+    padding: 0 10px;
+}

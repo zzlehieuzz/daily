@@ -1,5 +1,18 @@
-<div id="title-header">List user</div>
-<table class="table table-bordered table-hover table-striped">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <ul class="nav nav-pills btn-sm">
+            <li>
+                <a class="btn btn-primary" href="<?= $this->Url->build('/users/index') ?>">List users</a>
+            </li>
+            <li>
+                <a class="btn btn-default" href="<?= $this->Url->build('/users/add') ?>">New users</a>
+            </li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-bordered table-hover table-striped">
     <thead>
         <tr>
             <th width="5%">#</th>
@@ -29,3 +42,7 @@
         <?php endif; ?>
     </tbody>
 </table>
+            </div>
+        </div>
+    </div>
+</div>
