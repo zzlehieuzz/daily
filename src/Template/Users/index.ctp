@@ -7,6 +7,9 @@
             <li>
                 <a class="btn btn-default" href="<?= $this->Url->build('/users/add') ?>">New users</a>
             </li>
+            <li>
+                <a class="btn btn-default" href="<?= $this->Url->build('/users/profile') ?>">Profile</a>
+            </li>
         </ul>
     </div>
     <div class="panel-body">

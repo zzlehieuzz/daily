@@ -82,7 +82,7 @@
                 <?php if ($action === 'edit'): ?>
                     <button type="button" class="btn btn-danger btn-sm" onclick="checkToDelete(this);">Remove</button>
                 <?php endif; ?>
-                <button type="reset" class="btn btn-primary btn-sm btn-create">Reset</button>
+                <button type="reset" class="btn btn-warning btn-sm btn-create">Reset</button>
                 <button type="submit" class="btn btn-primary btn-sm btn-create">Save</button>
             </div>
         </div>

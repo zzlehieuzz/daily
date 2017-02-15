@@ -6,7 +6,7 @@
                 <a class="btn btn-default" href="<?= $this->Url->build('/daily/index') ?>">List daily</a>
             </li>
             <li>
-                <a class="btn btn-primary" href="<?= $this->Url->build('/daily/add') ?>">New daily</a>
+                <a class="btn btn-primary" href="<?= $this->Url->build('/auth/logout') ?>">New daily</a>
             </li>
         </ul>
     </div>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12 text-right">
-                        <button type="reset" class="btn btn-primary btn-sm btn-create">Reset</button>
+                        <button type="reset" class="btn btn-warning btn-sm btn-create">Reset</button>
                         <button type="submit" class="btn btn-primary btn-sm btn-create">Save</button>
                     </div>
                 </div>

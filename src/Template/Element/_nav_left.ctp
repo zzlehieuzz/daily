@@ -1,4 +1,3 @@
-<?php use Cake\Routing\Router; ?>
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse collapse">
         <ul class="nav" id="side-menu">
@@ -8,13 +7,13 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?= Router::url(['controller' => 'users', 'action'=> 'profile']); ?>">
+                        <a href="<?= $this->Url->build('/users/profile') ?>">
                             <i class="fa fa-user fa-fw"></i> User Profile
                         </a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="<?= Router::url(['controller' => 'auth', 'action'=> 'logout']); ?>">
+                        <a href="<?= $this->Url->build('/auth/logout') ?>">
                             <i class="fa fa-sign-out fa-fw"></i> Logout
                         </a>
                     </li>
@@ -25,10 +24,10 @@
                 <a href="#"><i class="fa fa-users fa-fw"></i> Users<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?= Router::url(['controller' => 'users', 'action'=> 'index']); ?>">List User</a>
+                        <a href="<?= $this->Url->build('/users/index') ?>">List User</a>
                     </li>
                     <li>
-                        <a href="<?= Router::url(['controller' => 'users', 'action'=> 'add']); ?>">Add User</a>
+                        <a href="<?= $this->Url->build('/users/add') ?>">Add User</a>
                     </li>
                 </ul>
             </li>
@@ -36,10 +35,10 @@
                 <a href="#"><i class="fa fa-users fa-fw"></i> Daily<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?= Router::url(['controller' => 'daily', 'action'=> 'index']); ?>">List Daily</a>
+                        <a href="<?= $this->Url->build('/daily/index') ?>">List Daily</a>
                     </li>
                     <li>
-                        <a href="<?= Router::url(['controller' => 'daily', 'action'=> 'add']); ?>">Add Daily</a>
+                        <a href="<?= $this->Url->build('/daily/add') ?>">Add Daily</a>
                     </li>
                 </ul>
             </li>

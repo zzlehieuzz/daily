@@ -20,7 +20,6 @@ class UsersController extends AppController
 {
 
     /**
-     * ユーザー一覧アクション
      * @return \Cake\Network\Response|null
      */
     public function index()
@@ -122,8 +121,7 @@ class UsersController extends AppController
     }
 
     /**
-     * 削除アクション
-     * @param null $intId ：ユーザーID
+     * @param null $intId
      * @return \Cake\Network\Response|null
      */
     public function delete($intId = NULL)
@@ -148,8 +146,39 @@ class UsersController extends AppController
     {
         $objUser = $this->Users->find()->where(['id' => self::$m_aryUser['id']])->first();
         if(!$objUser) {
-
+            $this->errorFlash(__('User not found'));
+            return $this->redirect(Constant::$C_ROUTE_LOGIN_REDIRECT);
         }
-        $this->set('objUser', $objUser);
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $aryData = $this->request->data;
+            if ($aryData['password'] == '') {
+                unset($aryData['password']);
+            }
+
+            $aryData['id'] = $objUser->id;
+            $aryData['username'] = $objUser->username;
+            $aryData['role'] = $objUser->role;
+
+            $objEntityUser = $this->Users->newEntity($aryData, ['validate' => 'editUsers']);
+
+            if ($objUser && count($objEntityUser->errors()) == 0) {
+                $this->Users->save($objEntityUser);
+                $this->successFlash(__('Successfully saved'));
+                return $this->redirect(['action' => 'profile']);
+            } else {
+                $aryError[] = Utility::getErrors($objEntityUser->errors());
+
+                if (count($aryError) > 0) {
+                    $this->errorFlash($aryError);
+                }
+            }
+            $objUser = $objEntityUser;
+        } else {
+            $this->request->data = $objUser;
+            unset($this->request->data['password']);
+        }
+
+        $this->set('objEntity', $objUser);
     }
 }
