@@ -14,4 +14,4 @@
 <?= $this->Html->script('../libs/vendor/raphael/raphael.min.js') ?>
 <?= $this->Html->script('../libs/vendor/morrisjs/morris.min.js') ?>
 <?= $this->Html->script('../libs/dist/js/sb-admin-2.js') ?>
-<?= $this->Html->script('common.js') ?>
+<?= $this->Html->script('common.js?v=20170215_1') ?>
