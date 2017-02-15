@@ -3,7 +3,7 @@
     <div class="sidebar-nav navbar-collapse collapse">
         <ul class="nav" id="side-menu">
             <li>
-                <a href="<?= Router::url(['controller' => 'daily', 'action'=> 'index']); ?>">
+                <a href="#">
                     <i class="fa fa-dashboard fa-fw"></i> Dashboard<span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">

@@ -3,7 +3,7 @@ $(function () {
         processPage();
     });
 
-    $('a').click(function(){
+    $('a[href]:not([href^="#"], [href=""])').click(function(){
         processPage();
     });
 
