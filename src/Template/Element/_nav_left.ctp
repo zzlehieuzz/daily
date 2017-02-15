@@ -35,10 +35,13 @@
                 <a href="#"><i class="fa fa-users fa-fw"></i> Daily<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?= $this->Url->build('/daily/index') ?>">List Daily</a>
+                        <a href="<?= $this->Url->build('/daily/salary') ?>">Salary</a>
                     </li>
                     <li>
-                        <a href="<?= $this->Url->build('/daily/add') ?>">Add Daily</a>
+                        <a href="<?= $this->Url->build('/daily/index') ?>">Daily</a>
+                    </li>
+                    <li>
+                        <a href="<?= $this->Url->build('/daily/add') ?>">New</a>
                     </li>
                 </ul>
             </li>

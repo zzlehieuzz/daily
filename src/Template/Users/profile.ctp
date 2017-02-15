@@ -12,7 +12,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-xs-12">
-                <?= $this->Form->create($objEntity, ['url' => ['action' => 'profile'], 'method' => 'post']); ?>
+                <?= $this->Form->create($objEntity, ['url' => ['action' => 'profile'], 'class' => 'form-horizontal', 'method' => 'post']); ?>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">
                         <strong>Username</strong>
@@ -22,27 +22,25 @@
                     </label>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label"><strong>Name <span class="text-danger">(*)</span></strong></label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <?= $this->Form->input('name', [
                             'error' => FALSE,
                             'required' => FALSE,
                             'label' => FALSE,
                             'class' => 'form-control',
-                            'placeholder' => 'Please enter within 50 characters',
+                            'placeholder' => 'Please enter Name within 50 characters',
                             'maxlength' => 50
                         ]); ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label"><strong>New PW</strong></label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <?= $this->Form->input('password', [
                             'error' => FALSE,
                             'required' => FALSE,
                             'label' => FALSE,
                             'class' => 'form-control',
-                            'placeholder' => 'Please enter within 20 characters',
+                            'placeholder' => 'New PW',
                             'maxlength' => 20
                         ]); ?>
                     </div>

@@ -18,6 +18,7 @@ use App\Libs\Constant;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\Network\Exception\NotFoundException;
+use Psr\Log\LogLevel;
 
 /**
  * Application Controller
@@ -36,8 +37,10 @@ class AppController extends Controller
     public function initialize() {
         parent::initialize();
         $this->loadModel('Users');
+        $this->loadModel('Config');
         $this->loadModel('Category');
         $this->loadModel('Daily');
+        $this->loadModel('Salary');
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
@@ -92,7 +95,23 @@ class AppController extends Controller
     public function beforeFilter(Event $event) {
         parent::beforeFilter($event);
         $aryUser = $this->Auth->user();
-        $aryUser = $this->Users->find()->where(['id' => $aryUser['id']])->first();
+
+
+        $arySelectField = [
+            'id' => 'Users.id'
+            ,'username' => 'Users.username'
+            ,'password' => 'Users.password'
+            ,'name' => 'Users.name'
+            ,'role' => 'Users.role'
+            ,'login_date' => 'Users.login_date'
+            ,'currency' => 'Config.currency_value'
+        ];
+
+        $aryUser = $this->Users->find()
+            ->select($arySelectField)
+            ->where(['Users.id' => $aryUser['id']])
+            ->contain(['Config'])->first();
+
         if(isset($this->request->params['controller']) === TRUE) {
             self::$m_strControllerName = $this->request->params['controller'];
         }
@@ -157,5 +176,13 @@ class AppController extends Controller
             $aryResult['status'] = $state;
         }
         echo json_encode($aryResult);
+    }
+
+    function logDebug($message) {
+        $this->log($message, LogLevel::DEBUG);
+    }
+
+    function logError($message) {
+        $this->log($message, LogLevel::ERROR);
     }
 }

@@ -51,14 +51,14 @@ class UsersController extends AppController
                     $aryData['name'] = '';
                 }
             }
-
-            if (isset($aryData['role']) == TRUE) {
-                $aryData['role'] = Constant::C_USER_ROLE_ADMIN;
-            }
             $objEntityUser = $this->Users->newEntity($aryData);
 
             if (count($aryError) == 0 && count($objEntityUser->errors()) == 0) {
-                $this->Users->save($objEntityUser);
+                if($this->Users->save($objEntityUser)) {
+                    $this->Config->save($this->Config->newEntity([
+                        'user_id' => $objEntityUser->id
+                    ]));
+                }
                 $this->successFlash(__('Successfully saved'));
                 return $this->redirect(['action' => 'index']);
             } else {

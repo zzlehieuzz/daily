@@ -46,8 +46,20 @@ class DailyController extends AppController
                 $aryData[$aryDailyItem['date_y_m']][$aryDailyItem['category_id']] = $aryDailyItem['amount'];
             }
         }
+        $arySalary = [];
+        $arySalaryOri = $this->Salary->find('all', [
+            'order' => ['created' => 'DESC']])
+            ->where(['user_id' => self::$m_aryUser['id']])->toArray();
+
+        foreach($arySalaryOri as $arySalaryItem) {
+            $arySalary[$arySalaryItem['date_y_m']]['default_value'] = $arySalaryItem['default_value'];
+            $arySalary[$arySalaryItem['date_y_m']]['real_value'] = $arySalaryItem['real_value'];
+        }
+
+//        pr($arySalary);die;
 
         $this->set('aryData', $aryData);
+        $this->set('arySalary', $arySalary);
         $this->set('aryCategory', $aryCategory);
     }
 
@@ -64,9 +76,21 @@ class DailyController extends AppController
 
             if (count($objEntity->errors()) == 0) {
                 $objEntity->user_id = self::$m_aryUser['id'];
-                $objEntity->date_y_m = $objEntity->date_process;
+                $objEntity->date_y_m = substr($objEntity->date_process, 0, 7);
 
-                $this->Daily->save($objEntity);
+                if($this->Daily->save($objEntity)) {
+                    $intSalary = $this->Salary->find()
+                        ->where(['user_id' => self::$m_aryUser['id'], 'date_y_m' => $objEntity->date_y_m])
+                        ->count();
+
+                    if($intSalary == 0) {
+                        $this->Salary->save($this->Salary->newEntity([
+                            'date_y_m' => $objEntity->date_y_m,
+                            'user_id' => self::$m_aryUser['id']
+                        ]));
+                    }
+                }
+
                 $this->successFlash(__('Successfully saved'));
                 return $this->redirect(['action' => 'add']);
             } else {
@@ -105,14 +129,14 @@ class DailyController extends AppController
         $objEntity = null;
 
         $aryCategory = $this->Category->find('list', ['order' => ['created' => 'DESC']])->toArray();
-        $aryDaily = $this->Daily->find('all', ['order' => ['Daily.date_process' => 'DESC']])
+        $aryDaily = $this->Daily->find('all', ['order' => ['date_process' => 'DESC']])
             ->select($aryField)
-            ->where(['Daily.user_id' => self::$m_aryUser['id']]);
+            ->where(['user_id' => self::$m_aryUser['id']]);
         if($strDateYM) {
-            $aryDaily->where(['Daily.date_y_m' => $strDateYM]);
+            $aryDaily->where(['date_y_m' => $strDateYM]);
         }
         if($intCategory) {
-            $aryDaily->where(['Daily.category_id' => $intCategory]);
+            $aryDaily->where(['category_id' => $intCategory]);
         }
         $aryDaily->toArray();
 
@@ -181,5 +205,52 @@ class DailyController extends AppController
         }
 
         return $this->jsonResponse(isset($aryData['aryId']) ? $aryData['aryId'] : [], $result);
+    }
+
+    public function salary($intId = null)
+    {
+        $objEntity = null;
+        $arySalary = $this->Salary->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'date_y_m',
+            'order' => ['created' => 'DESC']])
+        ->where(['user_id' => self::$m_aryUser['id']])->toArray();
+
+        if($this->request->is('post') || $this->request->is('put')) {
+            $aryData = $this->request->data;
+
+            $aryData['user_id'] = self::$m_aryUser['id'];
+            $objEditEntity = $this->Salary->newEntity($aryData);
+
+            if (count($objEditEntity->errors()) == 0) {
+                $intSalary = $this->Salary->find()
+                    ->where(['id' => $aryData['id'], 'user_id' => self::$m_aryUser['id']])->count();
+
+                if ($intSalary <= 0) {
+                    $this->errorFlash(['Data not found']);
+                } else {
+                    $this->Salary->save($objEditEntity);
+                    $this->successFlash(__('Successfully saved'));
+                    return $this->redirect(['action' => 'salary/' . $aryData['id']]);
+                }
+            } else {
+                $aryError = Utility::getErrors($objEditEntity->errors());
+                if(count($aryError) > 0) {
+                    $this->errorFlash($aryError);
+                }
+            }
+            $objEntity = $objEditEntity;
+        } else {
+            if(count($arySalary) > 0) {
+                if(!$intId) {
+                    $intId = current(array_keys($arySalary));
+                }
+                $objEntity = $this->Salary->find()
+                    ->where(['id' => $intId, 'user_id'=> self::$m_aryUser['id']])->first();
+            }
+        }
+
+        $this->set('objEntity', $objEntity);
+        $this->set('arySalary', $arySalary);
     }
 }

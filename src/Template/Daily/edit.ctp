@@ -4,13 +4,16 @@
     <div class="panel-heading">
         <ul class="nav nav-pills btn-sm">
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/index') ?>">List daily</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/index') ?>">Daily</a>
             </li>
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">New daily</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">New</a>
             </li>
             <li>
                 <a class="btn btn-primary" href="<?= $this->Url->build("/daily/edit/$strDateYM/$intCategory") ?>">Edit daily</a>
+            </li>
+            <li>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/salary') ?>">Salary</a>
             </li>
         </ul>
     </div>
@@ -102,7 +105,7 @@
                     <td>
                         <?= $this->Number->format($aryDataItem->amount, [
                             'places' => 0,
-                            'before' => '¥ ',
+                            'before' => \App\Libs\Constant::$C_USER_CURRENCY[$user['currency']] . ' ',
                             'escape' => false,
                             'decimals' => '.',
                             'thousands' => ','
@@ -117,7 +120,7 @@
                     <strong>
                         <?= $this->Number->format($intAmount, [
                             'places' => 0,
-                            'before' => '¥ ',
+                            'before' => \App\Libs\Constant::$C_USER_CURRENCY[$user['currency']] . ' ',
                             'escape' => false,
                             'decimals' => '.',
                             'thousands' => ','

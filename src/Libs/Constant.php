@@ -25,8 +25,7 @@ class Constant
 
     static $C_USER_ROLE = ['USER', 'ADMIN'];
 
-
-
+    static $C_USER_CURRENCY = [1 => '¥', 'VND'];
 
     // 日付フォーマット
     const C_YMD_BR_HI = "Y/m/d \n H:i";

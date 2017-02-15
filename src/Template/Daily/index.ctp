@@ -2,10 +2,13 @@
     <div class="panel-heading">
         <ul class="nav nav-pills btn-sm">
             <li>
-                <a class="btn btn-primary" href="<?= $this->Url->build('/daily/index') ?>">List daily</a>
+                <a class="btn btn-primary" href="<?= $this->Url->build('/daily/index') ?>">Daily</a>
             </li>
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">New daily</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">New</a>
+            </li>
+            <li>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/salary') ?>">Salary</a>
             </li>
         </ul>
     </div>
@@ -24,37 +27,89 @@
                                 <?php $intAmount = 0; ?>
                                 <?php foreach ($aryCategory as $aryCategoryKey => $aryCategoryItem): ?>
                                     <?php if (isset($objDataItem[$aryCategoryKey])): ?>
-                                        <div class="col-xs-5 text-right">
+                                        <div class="col-xs-7 text-right">
+                                            <a href="<?= $this->Url->build('/daily/edit/' . urlencode($strDataKey) . '/' . urlencode($aryCategoryKey)); ?>">
+                                                <?= $aryCategoryItem ?>
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-5 text-left">
                                             <?= $this->Number->format($objDataItem[$aryCategoryKey], [
                                                 'places' => 0,
-                                                'before' => '¥',
+                                                'before' => \App\Libs\Constant::$C_USER_CURRENCY[$user['currency']] . ' ',
                                                 'escape' => false,
                                                 'decimals' => '.',
                                                 'thousands' => ','
                                             ]) ?>
                                             <?php $intAmount += $objDataItem[$aryCategoryKey]; ?>
                                         </div>
-                                        <div class="col-xs-7 text-left">
-                                            <a href="<?= $this->Url->build('/daily/edit/' . urlencode($strDataKey) . '/' . urlencode($aryCategoryKey)); ?>">
-                                                <?= $aryCategoryItem ?>
-                                            </a>
-                                        </div>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
-                                <div class="col-xs-5 text-right">
-                                    <strong>
-                                        <?= $this->Number->format($intAmount, [
-                                            'places' => 0,
-                                            'before' => '¥ ',
-                                            'escape' => false,
-                                            'decimals' => '.',
-                                            'thousands' => ','
-                                        ]) ?>
-                                    </strong>
-                                </div>
-                                <div class="col-xs-7 text-left">
-                                    <strong>Total</strong>
-                                </div>
+                                <?php if(isset($arySalary[$strDataKey]) && ($aryValue = $arySalary[$strDataKey])): ?>
+
+                                    <div class="col-xs-7 text-right">
+                                        <strong><i>[ DEFT ]</i>
+                                            <?= $this->Number->format($arySalary[$strDataKey]['default_value'], [
+                                                'places' => 0,
+                                                'before' => '',
+                                                'escape' => false,
+                                                'decimals' => '.',
+                                                'thousands' => ','
+                                            ]) ?>
+                                        </strong>-
+                                        <strong>
+                                            <?= $this->Number->format($intAmount, [
+                                                'places' => 0,
+                                                'before' => '',
+                                                'escape' => false,
+                                                'decimals' => '.',
+                                                'thousands' => ','
+                                            ]) ?>
+                                        </strong>
+                                    </div>
+                                    <div class="col-xs-5 text-left">
+                                        <strong>
+                                            <?= $this->Number->format(($arySalary[$strDataKey]['default_value'] - $intAmount), [
+                                                'places' => 0,
+                                                'before' => \App\Libs\Constant::$C_USER_CURRENCY[$user['currency']] . ' ',
+                                                'escape' => false,
+                                                'decimals' => '.',
+                                                'thousands' => ','
+                                            ]) ?>
+                                        </strong>
+                                    </div>
+
+                                    <div class="col-xs-7 text-right">
+                                        <strong><i>[ REAL ]</i>
+                                            <?= $this->Number->format($arySalary[$strDataKey]['real_value'], [
+                                                'places' => 0,
+                                                'before' => '',
+                                                'escape' => false,
+                                                'decimals' => '.',
+                                                'thousands' => ','
+                                            ]) ?>
+                                        </strong>-
+                                        <strong>
+                                            <?= $this->Number->format($intAmount, [
+                                                'places' => 0,
+                                                'before' => '',
+                                                'escape' => false,
+                                                'decimals' => '.',
+                                                'thousands' => ','
+                                            ]) ?>
+                                        </strong>
+                                    </div>
+                                    <div class="col-xs-5 text-left">
+                                        <strong>
+                                            <?= $this->Number->format(($aryValue['real_value'] - $intAmount), [
+                                                'places' => 0,
+                                                'before' => \App\Libs\Constant::$C_USER_CURRENCY[$user['currency']] . ' ',
+                                                'escape' => false,
+                                                'decimals' => '.',
+                                                'thousands' => ','
+                                            ]) ?>
+                                        </strong>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                             <div class="panel-footer">
                                 <a href="<?= $this->Url->build('/daily/edit/' . urlencode($strDataKey)); ?>">

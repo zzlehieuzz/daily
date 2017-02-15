@@ -11,6 +11,8 @@ use Cake\Validation\Validator;
  * Users Model
  *
  * @property \Cake\ORM\Association\HasMany $Daily
+ * @property \Cake\ORM\Association\HasMany $Salary
+ * @property \Cake\ORM\Association\HasOne $Config
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
@@ -41,7 +43,15 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->hasOne('Config', [
+            'foreignKey' => 'user_id'
+        ]);
+
         $this->hasMany('Daily', [
+            'foreignKey' => 'user_id'
+        ]);
+
+        $this->hasMany('Salary', [
             'foreignKey' => 'user_id'
         ]);
     }
