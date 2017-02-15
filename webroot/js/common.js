@@ -3,20 +3,22 @@ $(function () {
         processPage();
     });
 
-    $("#header-text").text($("#title-header").text());
-
-    $('.s-popup-confirm').click(function(e) {
-        openPopupConfirm('Delete. Is it OK.');
+    $('a').click(function(){
+        processPage();
     });
 
+    $("#header-text").text($("#title-header").text());
+
     $('#popup-confirm #btn-popup-confirm-yes').click(function() {
-        var url = $('.s-popup-confirm').attr('url');
-        if(url) {
-            $(this).addClass('disabled');
-            apiPost(url, {}, function (res) {
-                window.location.reload();
-            });
+        var func = $(this).attr('func');
+        if(func) {
+            $(this).addClass('disabled').attr('disabled', 'disabled');
+            eval(func);
         }
+    });
+
+    $('#popup-confirm').on('hidden.bs.modal', function (event) {
+        clearPopupConfirm();
     });
 });
 
@@ -24,6 +26,15 @@ function checkToDelete(me) {
     openPopupConfirm('Delete. Is it OK.');
     me = $(me);
     $(me).addClass('deleting');
+}
+
+function clearPopupConfirm(name) {
+    name = typeof name !== 'undefined' && name ? name : '#popup-confirm';
+
+    $(name + ' #btn-popup-confirm-yes')
+        .removeClass('disabled')
+        .removeAttr('disabled')
+        .removeAttr('func');
 }
 
 // AJAXのGETリクエスト
@@ -51,10 +62,10 @@ function apiPost(requestPath, params, callBackFunc, obj) {
                 callBackFunc(data, obj);
             }
         } else {
-            window.location.replace(error500);
+            //window.location.replace(error500);
         }
     }, 'json').fail(function (jqXHR, textStatus, error) {
-        window.location.replace(error500);
+        //window.location.replace(error500);
     });
 }
 
@@ -101,6 +112,13 @@ function openPopupConfirm(msg, name) {
     name = typeof name !== 'undefined' && name ? name : '#popup-confirm';
     $(name).find('#msg').text(msg);
     $(name).modal('show');
+}
+
+function closePopupConfirm(name) {
+    name = typeof name !== 'undefined' && name ? name : '#popup-confirm';
+    clearPopupConfirm();
+    $(name).find('#msg').text('');
+    $(name).modal('hide');
 }
 
 // ファイルサイズ表示

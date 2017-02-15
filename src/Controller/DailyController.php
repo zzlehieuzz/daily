@@ -20,7 +20,6 @@ class DailyController extends AppController
 {
 
     /**
-     * ユーザー一覧アクション
      * @return \Cake\Network\Response|null
      */
     public function index()
@@ -152,7 +151,7 @@ class DailyController extends AppController
     {
         $this->autoRender = FALSE;
         $aryDaily = [];
-        $intId = $this->request->query('int_Id');
+        $intId = $this->request->query('id');
         if($intId) {
             $aryDaily = $this->Daily->find()
                 ->where(['id' => $intId, 'user_id' => self::$m_aryUser['id']])
@@ -162,57 +161,25 @@ class DailyController extends AppController
         return $this->jsonResponse($aryDaily, TRUE);
     }
 
-    public function processEdit()
+    public function delete()
     {
-        $this->autoRender = FALSE;
-        $aryDaily = [];
-        $intId = $this->request->param('int_Id');
-        if($this->request->is('post') && $intId) {
-
-
-
-
-//            $aryDaily = $this->Daily->find()
-//                ->where(['id' => $intId, 'user_id' => self::$m_aryUser['id']])
-//                ->first()->toArray();
+        $this->autoRender = false;
+        $aryData = $this->request->data;
+        $result = false;
+        if($this->request->is('post') && isset($aryData['aryId']) && ($aryId = $aryData['aryId'])) {
+            $intDaily = $this->Daily
+                ->find()
+                ->where(['id IN' => $aryId, 'user_id' => self::$m_aryUser['id']])->count();
+            if($intDaily == count($aryId)) {
+                if($this->Daily->deleteAll(['Daily.id IN' => $aryId])) {
+                    $result = true;
+                    $this->successFlash(__('Successfully deleted'));
+                }
+            } else {
+                $this->errorFlash(__('Can not delete'));
+            }
         }
 
-        return $this->jsonResponse($aryDaily, TRUE);
-    }
-
-    /**
-     * 削除アクション
-     * @param null $intId ：ユーザーID
-     * @return \Cake\Network\Response|null
-     */
-    public function delete($intId = NULL)
-    {
-        // ユーザーレコードー
-        $objUser = NULL;
-        // ユーザーIDがない？
-        if ($intId == NULL) {
-            // エラーメッセージ設定
-            $this->errorFlash(__('ユーザーは存在しません'));
-            // 表示ページへ遷移
-            return $this->redirect(array('action' => 'index'));
-        }
-        // ユーザーデータ取得
-        $objUser = $this->Users->find()->where(['id' => $intId, 'deleted' => Constant::C_OFF])->first();
-        if ($objUser == NULL) {
-            // 削除失敗
-            $this->errorFlash(__('ユーザーは存在しません'));
-        } // 自身削除している？
-        elseif ($objUser->id == self::$m_aryUser['id']) {
-            // エラーメッセージ設定
-            $this->errorFlash(__('自身削除ができません'));
-            return $this->redirect(array('action' => 'edit/' . $intId));
-        } // 削除を行う
-        else {
-            $this->Users->updateAll(['deleted' => Constant::C_ON], ['id' => $objUser->id]);
-            // 成功メッセージ設定
-            $this->successFlash(__('正常に削除されました'));
-        }
-        // 表示ページへ遷移
-        return $this->redirect(array('action' => 'index'));
+        return $this->jsonResponse(isset($aryData['aryId']) ? $aryData['aryId'] : [], $result);
     }
 }

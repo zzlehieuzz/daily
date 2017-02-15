@@ -77,14 +77,19 @@
     </div>
 </div>
 
-<table class="table table-bordered table-hover">
+<table class="table table-bordered">
     <thead>
         <tr>
-            <th width="85">date</th>
+            <th width="85">
+                <button type="button" id="daily-load" class="btn btn-success btn-circle">
+                    <i class="fa fa-link"></i>
+                </button>
+                <button type="button" id="daily-delete" class="btn btn-warning btn-circle">
+                    <i class="fa fa-times"></i>
+                </button>
+            </th>
             <th>category</th>
             <th>amount</th>
-            <th>description</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -103,18 +108,12 @@
                             'thousands' => ','
                         ]) ?>
                     </td>
-                    <td><?= h($aryDataItem->description) ?></td>
-                    <td width="50">
-                        <a class="btn btn-warning btn-circle s-popup-confirm" url="<?= $this->Url->build('/daily/delete/'.$aryDataItem->id) ?>">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </td>
                     <?php $intAmount += $aryDataItem->amount ?>
                 </tr>
             <?php endforeach; ?>
             <tr class="">
                 <td align="right" colspan="2"><strong>Total</strong></td>
-                <td colspan="3">
+                <td colspan="1" class="alert alert-danger">
                     <strong>
                         <?= $this->Number->format($intAmount, [
                             'places' => 0,
@@ -136,5 +135,5 @@
 
 <div id="url" class="display-none"
     load-url="<?= $this->Url->build('/daily/loadToEdit'); ?>"
-    process-edit-url="<?= $this->Url->build('/daily/processEdit'); ?>"
+    delete-url="<?= $this->Url->build('/daily/delete'); ?>"
 ></div>
