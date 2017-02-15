@@ -32,7 +32,11 @@
                     </td>
                     <td><?= h($objUserItem->name) ?></td>
                     <td><?= h($objUserItem->login_date) ?></td>
-                    <td>X</td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-circle">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>

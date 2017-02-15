@@ -38,8 +38,6 @@ class UsersController extends AppController
     }
 
     /**
-     * ユーザー追加アクション
-     *
      * @return \Cake\Network\Response|null
      */
     public function add()
@@ -62,8 +60,8 @@ class UsersController extends AppController
 
             if (count($aryError) == 0 && count($objEntityUser->errors()) == 0) {
                 $this->Users->save($objEntityUser);
-                $this->successFlash(__('正常に保存されました'));
-                return $this->redirect(array('action' => 'index'));
+                $this->successFlash(__('Successfully saved'));
+                return $this->redirect(['action' => 'index']);
             } else {
                 $aryError[] = Utility::getErrors($objEntityUser->errors());
                 if (count($aryError) > 0) {
@@ -75,42 +73,28 @@ class UsersController extends AppController
     }
 
     /**
-     * ユーザー編集アクション
-     * @param null $intId ：ユーザーID
+     * @param null $intId
      * @return \Cake\Network\Response|null
      */
     public function edit($intId = NULL)
     {
-        $objUser = NULL;
-        // ユーザーレコードー
-        $objEntityUser = NULL;
-        // エラー管理配列
         $aryError = [];
-        // メニュー表示
-        // ユーザーIDがない？
         if ($intId == NULL) {
-            $this->errorFlash(__('ユーザーが存在しません'));
-            // 表示ページへ遷移
-            return $this->redirect(array('action' => 'index'));
+            $this->errorFlash(__('User not found'));
+            return $this->redirect(['action' => 'index']);
         }
 
-        // ユーザーデータ取得
-        $objUser = $this->Users->find()->where(['id' => $intId])->first();
-        // 取得できない？
-        if ($objUser == NULL) {
-            $this->errorFlash(__('ユーザーが存在しません'));
-            // 表示ページへ遷移
-            return $this->redirect(array('action' => 'index'));
+        $objEntityUser = $this->Users->find()->where(['id' => $intId])->first();
+        if ($objEntityUser == NULL) {
+            $this->errorFlash(__('User not found'));
+            return $this->redirect(['action' => 'index']);
         }
-        // ポストデータがある？
         if ($this->request->is('post') || $this->request->is('put')) {
-            // ポストデータを取得
             $aryData = $this->request->data;
-            // パスワード修正しなければ、除く
             if ($aryData['password'] == '') {
                 unset($aryData['password']);
             }
-            // 氏名の入力がある？
+
             if (isset($aryData['name']) == TRUE && $aryData['name']) {
                 $strName = preg_replace('[ |　|	]', '', $aryData['name']);
                 if ($strName == '') {
@@ -118,34 +102,23 @@ class UsersController extends AppController
                 }
             }
 
-            // レコードー作成
             $objEntityUser = $this->Users->newEntity($aryData, ['validate' => 'editUsers']);
-            // 整合性チェック
             if (count($aryError) == 0 && count($objEntityUser->errors()) == 0) {
-                // 保存
                 $this->Users->save($objEntityUser);
-                // 成功メッセージ設定
-                $this->successFlash(__('正常に保存されました'));
-                // 表示ページへ遷移
+                $this->successFlash(__('Successfully saved'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                // 整合性チェックのエラーを追加
                 $aryError[] = Utility::getErrors($objEntityUser->errors());
                 if (count($aryError) > 0) {
-                    // エラーメッセージ設定
                     $this->errorFlash($aryError);
-                    // ユーザーが入力されたデータを設定
-                    $objEntityUser->username = $objUser->username;
-                    $objUser = $objEntityUser;
                 }
             }
         } else {
-            // ユーザーのデータをフォームに設定する
-            $this->request->data = $objUser;
+            $this->request->data = $objEntityUser;
             unset($this->request->data['password']);
         }
 
-        $this->set('objEntityUser', $objUser);
+        $this->set('objEntityUser', $objEntityUser);
     }
 
     /**
@@ -155,33 +128,20 @@ class UsersController extends AppController
      */
     public function delete($intId = NULL)
     {
-        // ユーザーレコードー
-        $objUser = NULL;
-        // ユーザーIDがない？
         if ($intId == NULL) {
-            // エラーメッセージ設定
-            $this->errorFlash(__('ユーザーは存在しません'));
-            // 表示ページへ遷移
-            return $this->redirect(array('action' => 'index'));
+            $this->errorFlash(__('User does not exist'));
+            return $this->redirect(['action' => 'index']);
         }
-        // ユーザーデータ取得
-        $objUser = $this->Users->find()->where(['id' => $intId, 'deleted' => Constant::C_OFF])->first();
+        $objUser = $this->Users->find()->where(['id' => $intId])->first();
         if ($objUser == NULL) {
-            // 削除失敗
-            $this->errorFlash(__('ユーザーは存在しません'));
-        } // 自身削除している？
-        elseif ($objUser->id == self::$m_aryUser['id']) {
-            // エラーメッセージ設定
-            $this->errorFlash(__('自身削除ができません'));
-            return $this->redirect(array('action' => 'edit/' . $intId));
-        } // 削除を行う
-        else {
-            $this->Users->updateAll(['deleted' => Constant::C_ON], ['id' => $objUser->id]);
-            // 成功メッセージ設定
-            $this->successFlash(__('正常に削除されました'));
+            $this->errorFlash(__('User does not exist'));
+        } elseif ($objUser->id == self::$m_aryUser['id']) {
+            $this->errorFlash(__('Can not delete'));
+            return $this->redirect(['action' => 'index']);
+        } else {
+            $this->successFlash(__('Successfully deleted'));
         }
-        // 表示ページへ遷移
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(['action' => 'index']);
     }
 
     public function profile()

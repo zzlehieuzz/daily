@@ -68,7 +68,6 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12 text-right">
-                            <button type="button" class="btn btn-danger btn-sm" onclick="checkToDelete(this);">Remove</button>
                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                         </div>
                     </div>
@@ -85,6 +84,7 @@
             <th>category</th>
             <th>amount</th>
             <th>description</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -104,12 +104,17 @@
                         ]) ?>
                     </td>
                     <td><?= h($aryDataItem->description) ?></td>
+                    <td width="50">
+                        <a class="btn btn-warning btn-circle s-popup-confirm" url="<?= $this->Url->build('/daily/delete/'.$aryDataItem->id) ?>">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </td>
                     <?php $intAmount += $aryDataItem->amount ?>
                 </tr>
             <?php endforeach; ?>
             <tr class="">
                 <td align="right" colspan="2"><strong>Total</strong></td>
-                <td colspan="2">
+                <td colspan="3">
                     <strong>
                         <?= $this->Number->format($intAmount, [
                             'places' => 0,

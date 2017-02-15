@@ -4,6 +4,20 @@ $(function () {
     });
 
     $("#header-text").text($("#title-header").text());
+
+    $('.s-popup-confirm').click(function(e) {
+        openPopupConfirm('Delete. Is it OK.');
+    });
+
+    $('#popup-confirm #btn-popup-confirm-yes').click(function() {
+        var url = $('.s-popup-confirm').attr('url');
+        if(url) {
+            $(this).addClass('disabled');
+            apiPost(url, {}, function (res) {
+                window.location.reload();
+            });
+        }
+    });
 });
 
 function checkToDelete(me) {

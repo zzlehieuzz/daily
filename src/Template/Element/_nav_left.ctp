@@ -3,15 +3,10 @@
     <div class="sidebar-nav navbar-collapse collapse">
         <ul class="nav" id="side-menu">
             <li>
-                <a href="<?= Router::url(['controller' => 'admin', 'action'=> 'home']); ?>">
+                <a href="<?= Router::url(['controller' => 'daily', 'action'=> 'index']); ?>">
                     <i class="fa fa-dashboard fa-fw"></i> Dashboard<span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    <li>
-                        <a href="<?= Router::url(['controller' => 'pages', 'action'=> 'home']); ?>">
-                            <i class="fa fa-home fa-fw"></i> Home
-                        </a>
-                    </li>
                     <li>
                         <a href="<?= Router::url(['controller' => 'users', 'action'=> 'profile']); ?>">
                             <i class="fa fa-user fa-fw"></i> User Profile

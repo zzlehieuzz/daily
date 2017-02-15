@@ -52,43 +52,89 @@ class UsersTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
-
+    public function validationDefault(Validator $validator) {
         $validator
             ->requirePresence('username', 'create')
-            ->notEmpty('username', ['message' => 'Input is necessary']);
+            ->notEmpty('username', ['message' => 'Username is required'])
+            ->add('username', [
+                'characters' => [
+                    'rule'    => 'alphaNumeric',
+                    'message' => 'Username is alphanumeric only'
+                ],
+                'minLength'  => [
+                    'rule'    => ['minLength', 3],
+                    'last'    => TRUE,
+                    'message' => 'Please enter the username within 3-20 characters'
+                ],
+                'maxLength'  => [
+                    'rule'    => ['maxLength', 20],
+                    'message' => 'Please enter the username within 3-20 characters'
+                ],
+                'unique' => [
+                    'rule' => 'validateUnique',
+                    'provider' => 'table',
+                    'message' => 'It is already registered user name'
+                ]
+            ]);
 
         $validator
             ->requirePresence('password', 'create')
-            ->notEmpty('password', ['message' => 'Input is necessary']);
+            ->notEmpty('password', ['message' => 'PW is required'])
+            ->add('password', [
+                'characters' => [
+                    'rule'    => 'alphaNumeric',
+                    'message' => 'Username is alphanumeric only'
+                ],
+                'minLength'  => [
+                    'rule'    => ['minLength', 3],
+                    'last'    => TRUE,
+                    'message' => 'Please enter the password within 3-20 characters'
+                ],
+                'maxLength'  => [
+                    'rule'    => ['maxLength', 20],
+                    'message' => 'Please enter the password within 3-20 characters'
+                ]
+            ]);
 
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name', ['message' => 'Input is necessary']);
-
-        $validator
-            ->integer('role')
-            ->notEmpty('role', ['message' => 'Input is necessary']);
+            ->notEmpty('name', ['message' => 'Name is required'])
+            ->add('name', [
+                'maxLength' => [
+                    'rule'    => ['maxLength', 50],
+                    'message' => 'Please enter your name within 50 characters'
+                ]
+            ]);
 
         return $validator;
     }
 
     /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
+     * @param Validator $validator
+     * @return Validator
      */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->isUnique(['username']));
+    public function validationEditUsers(Validator $validator) {
+        $validator
+            ->add('password', [
+                'minLength' => [
+                    'rule'    => ['minLength', 3],
+                    'last'    => TRUE,
+                    'message' => 'Please enter the password within 3-20 characters'
+                ],
+                'maxLength' => [
+                    'rule'    => ['maxLength', 20],
+                    'message' => 'Please enter the password within 3-20 characters'
+                ]
+            ]);
+        $validator
+            ->notEmpty('name', ['message' => 'Name is required'])
+            ->add('name', [
+                'maxLength' => [
+                    'rule'    => ['maxLength', 50],
+                    'message' => 'Please enter your name within 50 characters'
+                ]
+            ]);
 
-        return $rules;
+        return $validator;
     }
 
     public function beforeSave($event, $entity){
