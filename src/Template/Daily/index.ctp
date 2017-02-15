@@ -47,7 +47,7 @@
                                 <?php if(isset($arySalary[$strDataKey]) && ($aryValue = $arySalary[$strDataKey])): ?>
 
                                     <div class="col-xs-7 text-right">
-                                        <strong><i>[ DEFT ]</i>
+                                        <strong><i>[ D ]</i>
                                             <?= $this->Number->format($arySalary[$strDataKey]['default_value'], [
                                                 'places' => 0,
                                                 'before' => '',
@@ -79,7 +79,7 @@
                                     </div>
 
                                     <div class="col-xs-7 text-right">
-                                        <strong><i>[ REAL ]</i>
+                                        <strong><i>[ R ]</i>
                                             <?= $this->Number->format($arySalary[$strDataKey]['real_value'], [
                                                 'places' => 0,
                                                 'before' => '',
