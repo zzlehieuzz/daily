@@ -204,7 +204,7 @@ class DailyController extends AppController
             }
         }
 
-        return $this->jsonResponse(isset($aryData['aryId']) ? $aryData['aryId'] : [], $result);
+        return $this->jsonResponse([], $result);
     }
 
     public function salary($intId = null)

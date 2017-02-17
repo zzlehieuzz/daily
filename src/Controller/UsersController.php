@@ -31,7 +31,9 @@ class UsersController extends AppController
             'login_date' => 'Users.login_date'
         ];
 
-        $aryUser = $this->Users->find('all', ['order' => ['Users.created' => 'ASC']])->select($aryField)->toArray();
+        $aryUser = $this->Users->find('all', ['order' => ['Users.created' => 'ASC']])
+            ->where(['id !=' => self::$m_aryUser['id']])
+            ->select($aryField)->toArray();
 
         $this->set('aryUser', $aryUser);
     }
@@ -121,24 +123,28 @@ class UsersController extends AppController
     }
 
     /**
-     * @param null $intId
      * @return \Cake\Network\Response|null
      */
-    public function delete($intId = NULL)
+    public function delete()
     {
-        if ($intId == NULL) {
-            $this->errorFlash(__('User does not exist'));
-            return $this->redirect(['action' => 'index']);
+        $this->autoRender = false;
+        $aryData = $this->request->data;
+        $result = false;
+        if( self::$m_aryUser['role'] == Constant::C_USER_ROLE_SUPER
+            && $this->request->is('post')
+            && isset($aryData['id'])
+            && ($intId = $aryData['id'])) {
+            $intUser = $this->Users ->find()->where(['id' => $intId])->count();
+            if($intUser == 1) {
+                if($this->Users->deleteAll(['id' => $intId])) {
+                    $result = true;
+                    $this->successFlash(__('Successfully deleted'));
+                }
+            } else {
+                $this->errorFlash(__('Can not delete'));
+            }
         }
-        $objUser = $this->Users->find()->where(['id' => $intId])->first();
-        if ($objUser == NULL) {
-            $this->errorFlash(__('User does not exist'));
-        } elseif ($objUser->id == self::$m_aryUser['id']) {
-            $this->errorFlash(__('Can not delete'));
-            return $this->redirect(['action' => 'index']);
-        } else {
-            $this->successFlash(__('Successfully deleted'));
-        }
-        return $this->redirect(['action' => 'index']);
+
+        return $this->jsonResponse([], $result);
     }
 }

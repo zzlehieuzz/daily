@@ -30,3 +30,7 @@ configuration relevant for your application.
 
 ## Layout
 The app skeleton uses a subset of [Foundation](http://foundation.zurb.com/) CSS framework by default. You can, however, replace it with any other library or custom styles.
+
+## Query
+$this->Table->find('all', ['order' => ['created' => 'DESC']])->where(['id NOT IN' => []])
+$this->Table->find('list', ['order' => ['created' => 'DESC']])->where(['id NOT IN' => []])

@@ -17,6 +17,14 @@ $(function () {
         }
     });
 
+    $('.s-popup-del').click(function(e) {
+        openPopupConfirm('Delete. Is it OK.');
+        var func = $(this).attr('func');
+        if(func) {
+            $('#popup-confirm #btn-popup-confirm-yes').attr('func', func);
+        }
+    });
+
     $('#popup-confirm').on('hidden.bs.modal', function (event) {
         clearPopupConfirm();
     });
@@ -152,3 +160,6 @@ function escapeHtml(text) {
     });
 }
 
+function pr(msg) {
+    console.log(msg);
+}
