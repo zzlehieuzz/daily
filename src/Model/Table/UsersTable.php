@@ -147,8 +147,10 @@ class UsersTable extends Table
         return $validator;
     }
 
-    public function beforeSave($event, $entity){
-        $objHasher = new DefaultPasswordHasher();
-        $entity->password = $objHasher->hash($entity->password);
+    public function beforeSave($event, $entity) {
+        if($entity->password) {
+            $objHasher = new DefaultPasswordHasher();
+            $entity->password = $objHasher->hash($entity->password);
+        }
     }
 }
