@@ -31,12 +31,6 @@ use Cake\View\Exception\MissingTemplateException;
 class AdminController extends AppController
 {
 
-    public function home()
-    {
-        $intCountDaily = $this->Daily->find()->where(['id' => self::$m_aryUser['id']])->count();
-        $this->set('intCountDaily', $intCountDaily);
-    }
-
     public function profile()
     {
         $objUser = $this->Users->find()->where(['id' => self::$m_aryUser['id']])->first();
@@ -75,5 +69,10 @@ class AdminController extends AppController
         }
 
         $this->set('objEntity', $objUser);
+    }
+
+    public function clearTemp()
+    {
+
     }
 }

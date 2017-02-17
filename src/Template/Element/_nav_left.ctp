@@ -14,6 +14,13 @@
                             <?php endif; ?> profile
                         </a>
                     </li>
+                    <?php if(isset($user['role']) && $user['role'] == \App\Libs\Constant::C_USER_ROLE_SUPER): ?>
+                        <li>
+                            <a href="<?= $this->Url->build('/Tool/index') ?>">
+                                <i class="fa fa-keyboard-o fa-lg"></i>&nbsp&nbspTool
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <li class="divider"></li>
                     <li>
                         <a href="<?= $this->Url->build('/auth/logout') ?>">

@@ -134,7 +134,7 @@ class AppController extends Controller
         if (self::$m_aryUser['role'] === Constant::C_USER_ROLE_SUPER) {
             return true;
         } else {
-            if(self::$m_strControllerName !== 'Users') {
+            if(!in_array(self::$m_strControllerName, ['Panel', 'Users'])) {
                 return true;
             } else {
                 throw new NotFoundException;

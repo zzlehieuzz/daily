@@ -107,7 +107,7 @@ class UsersController extends AppController
             if (count($aryError) == 0 && count($objEntityUser->errors()) == 0) {
                 $this->Users->save($objEntityUser);
                 $this->successFlash(__('Successfully saved'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             } else {
                 $aryError[] = Utility::getErrors($objEntityUser->errors());
                 if (count($aryError) > 0) {
