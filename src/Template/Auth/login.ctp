@@ -21,3 +21,6 @@
         <?= $this->Form->end() ?>
     </div>
 </div>
+<div class="text-left">
+    <a href="<?= Cake\Routing\Router::url(Constant::$C_ROUTE_DEFAULT); ?>">Back</a>
+</div>

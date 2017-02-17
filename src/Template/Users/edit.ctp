@@ -11,7 +11,7 @@
                 <a class="btn btn-primary" href="<?= $this->Url->build('/users/edit/' . $objEntityUser->id) ?>">Edit</a>
             </li>
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/users/profile') ?>">Profile</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/admin/profile') ?>">Profile</a>
             </li>
         </ul>
     </div>

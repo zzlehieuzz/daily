@@ -3,12 +3,12 @@
         <ul class="nav" id="side-menu">
             <li>
                 <a href="#">
-                    <i class="fa fa-dashboard fa-fw"></i> Dashboard<span class="fa arrow"></span>
+                    <i class="fa fa-dashboard fa-lg"></i>&nbsp&nbspDashboard<span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse in">
                     <li>
                         <a href="<?= $this->Url->build('/admin/profile') ?>">
-                            <i class="fa fa-user fa-fw"></i>
+                            <i class="fa fa-user fa-lg"></i>&nbsp&nbsp
                             <?php if(isset($user['name'])): ?>
                                 <strong>[ <?= $user['name'] ?> ]</strong>
                             <?php endif; ?> profile
@@ -17,14 +17,14 @@
                     <li class="divider"></li>
                     <li>
                         <a href="<?= $this->Url->build('/auth/logout') ?>">
-                            <i class="fa fa-sign-out fa-fw"></i> Logout
+                            <i class="fa fa-sign-out fa-lg"></i>&nbsp&nbspLogout
                         </a>
                     </li>
                 </ul>
             </li>
             <?php if(isset($user['role']) && $user['role'] == \App\Libs\Constant::C_USER_ROLE_SUPER): ?>
                 <li>
-                    <a href="#"><i class="fa fa-users fa-fw"></i> Users<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-users fa-lg"></i>&nbsp&nbspUsers<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="<?= $this->Url->build('/users/index') ?>">List</a>
@@ -36,7 +36,7 @@
                 </li>
             <?php endif; ?>
             <li>
-                <a href="#"><i class="fa fa-users fa-fw"></i> Daily<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-users fa-lg"></i>&nbsp&nbspDaily<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="<?= $this->Url->build('/daily/salary') ?>">Salary</a>
