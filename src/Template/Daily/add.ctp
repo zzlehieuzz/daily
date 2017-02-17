@@ -6,7 +6,7 @@
                 <a class="btn btn-default" href="<?= $this->Url->build('/daily/index') ?>">List</a>
             </li>
             <li>
-                <a class="btn btn-primary" href="<?= $this->Url->build('/auth/logout') ?>">New</a>
+                <a class="btn btn-primary" href="<?= $this->Url->build('/daily/add') ?>">New</a>
             </li>
             <li>
                 <a class="btn btn-default" href="<?= $this->Url->build('/daily/salary') ?>">Salary</a>
