@@ -4,13 +4,13 @@
     <div class="panel-heading">
         <ul class="nav nav-pills btn-sm">
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/index') ?>">Daily</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/index') ?>">List</a>
             </li>
             <li>
                 <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">New</a>
             </li>
             <li>
-                <a class="btn btn-primary" href="<?= $this->Url->build("/daily/edit/$strDateYM/$intCategory") ?>">Edit daily</a>
+                <a class="btn btn-primary" href="<?= $this->Url->build("/daily/edit/$strDateYM/$intCategory") ?>">Edit</a>
             </li>
             <li>
                 <a class="btn btn-default" href="<?= $this->Url->build('/daily/salary') ?>">Salary</a>

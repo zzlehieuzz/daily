@@ -7,7 +7,7 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?= $this->Url->build('/users/profile') ?>">
+                        <a href="<?= $this->Url->build('/admin/profile') ?>">
                             <i class="fa fa-user fa-fw"></i> User Profile
                         </a>
                     </li>
@@ -18,19 +18,20 @@
                         </a>
                     </li>
                 </ul>
-
             </li>
-            <li>
-                <a href="#"><i class="fa fa-users fa-fw"></i> Users<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="<?= $this->Url->build('/users/index') ?>">List User</a>
-                    </li>
-                    <li>
-                        <a href="<?= $this->Url->build('/users/add') ?>">Add User</a>
-                    </li>
-                </ul>
-            </li>
+            <?php if(isset($user['role']) && $user['role'] == \App\Libs\Constant::C_USER_ROLE_SUPER): ?>
+                <li>
+                    <a href="#"><i class="fa fa-users fa-fw"></i> Users<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="<?= $this->Url->build('/users/index') ?>">List</a>
+                        </li>
+                        <li>
+                            <a href="<?= $this->Url->build('/users/add') ?>">Add</a>
+                        </li>
+                    </ul>
+                </li>
+            <?php endif; ?>
             <li>
                 <a href="#"><i class="fa fa-users fa-fw"></i> Daily<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -38,7 +39,7 @@
                         <a href="<?= $this->Url->build('/daily/salary') ?>">Salary</a>
                     </li>
                     <li>
-                        <a href="<?= $this->Url->build('/daily/index') ?>">Daily</a>
+                        <a href="<?= $this->Url->build('/daily/index') ?>">List</a>
                     </li>
                     <li>
                         <a href="<?= $this->Url->build('/daily/add') ?>">New</a>

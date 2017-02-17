@@ -96,7 +96,6 @@ class AppController extends Controller
         parent::beforeFilter($event);
         $aryUser = $this->Auth->user();
 
-
         $arySelectField = [
             'id' => 'Users.id'
             ,'username' => 'Users.username'
@@ -128,16 +127,14 @@ class AppController extends Controller
     }
 
     /**
-     * @param null $aryUser
      * @return bool
      * @throws NotFoundException
      */
-    public function isAuthorized($aryUser = null) {
-        if (self::$m_aryUser['role'] === Constant::C_USER_ROLE_ADMIN) {
+    public function isAuthorized() {
+        if (self::$m_aryUser['role'] === Constant::C_USER_ROLE_SUPER) {
             return true;
-        }
-        else {
-            if(self::$m_strControllerName !== 'Users' && self::$m_strControllerName !== 'CommentTemplate') {
+        } else {
+            if(self::$m_strControllerName !== 'Users') {
                 return true;
             } else {
                 throw new NotFoundException;

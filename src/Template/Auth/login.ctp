@@ -11,7 +11,7 @@
         <?= $this->Form->create() ?>
             <fieldset>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="InputEmail" name="username" placeholder="User id" maxlength="20">
+                    <input type="text" class="form-control" id="InputEmail" name="username" placeholder="Username" maxlength="20">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" id="InputPassword" name="password" placeholder="Password" maxlength="20">

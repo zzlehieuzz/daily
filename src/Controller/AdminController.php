@@ -14,6 +14,8 @@
  */
 namespace App\Controller;
 
+use App\Libs\Constant;
+use App\Libs\Utility;
 use Cake\Core\Configure;
 use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
@@ -33,5 +35,45 @@ class AdminController extends AppController
     {
         $intCountDaily = $this->Daily->find()->where(['id' => self::$m_aryUser['id']])->count();
         $this->set('intCountDaily', $intCountDaily);
+    }
+
+    public function profile()
+    {
+        $objUser = $this->Users->find()->where(['id' => self::$m_aryUser['id']])->first();
+        if(!$objUser) {
+            $this->errorFlash(__('User not found'));
+            return $this->redirect(Constant::$C_ROUTE_LOGIN_REDIRECT);
+        }
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $aryData = $this->request->data;
+            if ($aryData['password'] == '') {
+                unset($aryData['password']);
+            }
+
+            $aryData['id'] = $objUser->id;
+            $aryData['username'] = $objUser->username;
+            $aryData['role'] = $objUser->role;
+
+            $objEntityUser = $this->Users->newEntity($aryData, ['validate' => 'editUsers']);
+
+            if ($objUser && count($objEntityUser->errors()) == 0) {
+                $this->Users->save($objEntityUser);
+                $this->successFlash(__('Successfully saved'));
+                return $this->redirect(['action' => 'profile']);
+            } else {
+                $aryError[] = Utility::getErrors($objEntityUser->errors());
+
+                if (count($aryError) > 0) {
+                    $this->errorFlash($aryError);
+                }
+            }
+            $objUser = $objEntityUser;
+        } else {
+            $this->request->data = $objUser;
+            unset($this->request->data['password']);
+        }
+
+        $this->set('objEntity', $objUser);
     }
 }

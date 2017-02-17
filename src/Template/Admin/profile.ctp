@@ -5,7 +5,7 @@
                 <a class="btn btn-primary" href="<?= $this->Url->build('/users/profile') ?>">Profile</a>
             </li>
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">Logout</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/auth/logout') ?>">Logout</a>
             </li>
         </ul>
     </div>

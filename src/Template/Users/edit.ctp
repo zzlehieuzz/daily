@@ -2,13 +2,13 @@
     <div class="panel-heading">
         <ul class="nav nav-pills btn-sm">
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/users/index') ?>">List users</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/users/index') ?>">List</a>
             </li>
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/users/add') ?>">New users</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/users/add') ?>">New</a>
             </li>
             <li>
-                <a class="btn btn-primary" href="<?= $this->Url->build('/users/edit/' . $objEntityUser->id) ?>">Edit users</a>
+                <a class="btn btn-primary" href="<?= $this->Url->build('/users/edit/' . $objEntityUser->id) ?>">Edit</a>
             </li>
             <li>
                 <a class="btn btn-default" href="<?= $this->Url->build('/users/profile') ?>">Profile</a>

@@ -23,7 +23,15 @@ class Constant
     // ログアウト後、遷移ページ
     static $C_ROUTE_LOGOUT_REDIRECT = ['controller' => 'Auth', 'action' => 'login'];
 
-    static $C_USER_ROLE = ['USER', 'ADMIN'];
+    // ユーザーの権限
+    const C_USER_ROLE_SUPER = 0;
+    const C_USER_ROLE_ADMIN = 1;
+    const C_USER_ROLE_USER  = 2;
+    static $C_USER_ROLE = [
+        'SUPER',
+        self::C_USER_ROLE_ADMIN => 'ADMIN',
+        self::C_USER_ROLE_USER => 'USER'
+    ];
 
     static $C_USER_CURRENCY = [1 => '¥', 'VND'];
 
@@ -40,9 +48,7 @@ class Constant
     const C_OFF = FALSE;
     const C_ON = TRUE;
 
-    // ユーザーの権限
-    const C_USER_ROLE_ADMIN = 1;
-    const C_USER_ROLE_USER = 2;
+
 
     // 指示種別の値
     const C_INDICATION_TYPE_CONTACT = 1;
