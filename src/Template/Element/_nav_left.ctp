@@ -5,10 +5,13 @@
                 <a href="#">
                     <i class="fa fa-dashboard fa-fw"></i> Dashboard<span class="fa arrow"></span>
                 </a>
-                <ul class="nav nav-second-level">
+                <ul class="nav nav-second-level collapse in">
                     <li>
                         <a href="<?= $this->Url->build('/admin/profile') ?>">
-                            <i class="fa fa-user fa-fw"></i> User Profile
+                            <i class="fa fa-user fa-fw"></i>
+                            <?php if(isset($user['name'])): ?>
+                                <strong>[ <?= $user['name'] ?> ]</strong>
+                            <?php endif; ?> profile
                         </a>
                     </li>
                     <li class="divider"></li>
