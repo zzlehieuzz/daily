@@ -30,16 +30,17 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 #process-content {
-    z-index: 9999999999999;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    opacity: 0.2;
-    display: none;
-    background: black url("../img/loading.gif") no-repeat center center / 6rem 6rem;
-    cursor: progress; }
+    /*z-index: 9999999999999;*/
+    /*height: 100%;*/
+    /*width: 100%;*/
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*opacity: 0.2;*/
+    /*display: none;*/
+    background: transparent url("../img/loading.gif") no-repeat center center / 5rem 4rem;
+    /*cursor: progress; */
+}
 
 .alert {
     padding: 5px 10px;

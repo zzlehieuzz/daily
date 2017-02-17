@@ -13,12 +13,10 @@
     </head>
     <body>
         <div id="wrapper">
-            <div id="process-content"></div>
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <?= $this->element('_nav_top'); ?>
                 <?= $this->element('_nav_left'); ?>
             </nav>
-
             <div id="page-wrapper">
                 <div class="he-10"></div>
                 <?= $this->Flash->render('error') ?>
@@ -27,5 +25,6 @@
             </div>
         </div>
         <?= $this->element('_popup'); ?>
+        <div id="process-content" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog"></div>
     </body>
 </html>

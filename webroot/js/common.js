@@ -3,7 +3,8 @@ $(function () {
         processPage();
     });
 
-    $('a[href]:not([href^="#"], [href=""])').click(function(){
+    //$('a[href]:not([href^="#"], [href=""])').click(function(){
+    $('a[href]:not([href^="#"], [href=""])').on('click',function(e){
         processPage();
     });
 
@@ -139,14 +140,12 @@ function formatBytes(bytes, decimals) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
-// ローディングアイコン表示
 function processPage() {
-    $('#process-content').show();
+    $('#process-content').modal('show');
 }
 
-// ローディングアイコン非表示
 function disableProcessPage() {
-    $('#process-content').hide();
+    $('#process-content').modal('hide');
 }
 
 // escapeHTML文字

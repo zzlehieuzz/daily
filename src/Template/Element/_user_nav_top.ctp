@@ -20,8 +20,8 @@
             </li>
             <?php if(isset($user) && $user): ?>
                 <li>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-lg"></i> <i class="fa fa-caret-down"></i>
+                    <a href="#">
+                        <i class="fa fa-dashboard fa-lg"></i>&nbsp&nbspDashboard<span class="fa arrow"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li>

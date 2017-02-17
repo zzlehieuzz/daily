@@ -13,7 +13,6 @@
     </head>
     <body>
         <div class="container">
-            <div id="process-content"></div>
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <?= $this->Flash->render() ?>
@@ -21,5 +20,6 @@
                 </div>
             </div>
         </div>
+        <div id="process-content" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog"></div>
     </body>
 </html>
