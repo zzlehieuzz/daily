@@ -12,9 +12,6 @@
             <li>
                 <a class="btn btn-primary" href="<?= $this->Url->build("/daily/edit/$strDateYM/$intCategory") ?>">Edit</a>
             </li>
-            <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/salary') ?>">Salary</a>
-            </li>
         </ul>
     </div>
     <div class="panel-body">

@@ -17,14 +17,14 @@
                 <div class="col-xs-12">
                     <?= $this->Form->create($objEntity, ['url' => ['action' => 'salary/' . $dateYM], 'method' => 'post']); ?>
                     <div class="form-group">
-                        <?= $this->Form->input('id', array(
+                        <?= $this->Form->input('id', [
                             'templates' => ['inputContainer' => '{{content}}'],
                             'type' => 'select',
                             'div' => FALSE,
                             'class'=>'form-control',
                             'default' => isset($objEntity->id) ? $objEntity->id : '',
                             'options' => $arySalary,
-                            'label' => FALSE)); ?>
+                            'label' => FALSE]); ?>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->input('default_value', [

@@ -8,9 +8,6 @@
             <li>
                 <a class="btn btn-primary" href="<?= $this->Url->build('/daily/add') ?>">New</a>
             </li>
-            <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/salary') ?>">Salary</a>
-            </li>
         </ul>
     </div>
     <div class="panel-body">
