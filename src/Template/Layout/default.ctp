@@ -1,6 +1,6 @@
 <?php use App\Libs\Constant; ?>
 <!DOCTYPE html>
-<html>
+<html lang="ja">
     <head>
         <title><?= Constant::C_TITLE ?></title>
 

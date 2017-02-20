@@ -1,4 +1,5 @@
 <?= $this->Html->script('daily/add.js') ?>
+<?= $this->Html->script('daily/salary.js') ?>
 <div class="panel panel-default">
     <div class="panel-heading">
         <ul class="nav nav-pills btn-sm">
@@ -8,22 +9,20 @@
             <li>
                 <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">New</a>
             </li>
-            <li>
-                <a class="btn btn-primary" href="<?= $this->Url->build('/daily/salary') ?>">Salary</a>
-            </li>
         </ul>
     </div>
-    <?php if($arySalary): ?>
+    <?php if($arySalary && $objEntity): ?>
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12">
-                    <?= $this->Form->create($objEntity, ['url' => ['action' => 'salary'], 'method' => 'post']); ?>
+                    <?= $this->Form->create($objEntity, ['url' => ['action' => 'salary/' . $dateYM], 'method' => 'post']); ?>
                     <div class="form-group">
                         <?= $this->Form->input('id', array(
                             'templates' => ['inputContainer' => '{{content}}'],
                             'type' => 'select',
                             'div' => FALSE,
                             'class'=>'form-control',
+                            'default' => isset($objEntity->id) ? $objEntity->id : '',
                             'options' => $arySalary,
                             'label' => FALSE)); ?>
                     </div>
@@ -59,3 +58,5 @@
         </div>
     <?php endif; ?>
 </div>
+
+<div id="hidden-url" class="display-none" load-url="<?= $this->Url->build('/daily/salary/'); ?>"></div>

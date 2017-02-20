@@ -56,8 +56,6 @@ class DailyController extends AppController
             $arySalary[$arySalaryItem['date_y_m']]['real_value'] = $arySalaryItem['real_value'];
         }
 
-//        pr($arySalary);die;
-
         $this->set('aryData', $aryData);
         $this->set('arySalary', $arySalary);
         $this->set('aryCategory', $aryCategory);
@@ -207,8 +205,9 @@ class DailyController extends AppController
         return $this->jsonResponse([], $result);
     }
 
-    public function salary($intId = null)
+    public function salary($dateYM = null)
     {
+        $dateYM = urldecode($dateYM);
         $objEntity = null;
         $arySalary = $this->Salary->find('list', [
             'keyField' => 'id',
@@ -224,14 +223,13 @@ class DailyController extends AppController
 
             if (count($objEditEntity->errors()) == 0) {
                 $intSalary = $this->Salary->find()
-                    ->where(['id' => $aryData['id'], 'user_id' => self::$m_aryUser['id']])->count();
-
+                    ->where(['id' => $aryData['id'], 'date_y_m' => $dateYM, 'user_id' => self::$m_aryUser['id']])->count();
                 if ($intSalary <= 0) {
                     $this->errorFlash(['Data not found']);
                 } else {
                     $this->Salary->save($objEditEntity);
                     $this->successFlash(__('Successfully saved'));
-                    return $this->redirect(['action' => 'salary/' . $aryData['id']]);
+                    return $this->redirect(['action' => 'salary/' . $dateYM]);
                 }
             } else {
                 $aryError = Utility::getErrors($objEditEntity->errors());
@@ -241,16 +239,14 @@ class DailyController extends AppController
             }
             $objEntity = $objEditEntity;
         } else {
-            if(count($arySalary) > 0) {
-                if(!$intId) {
-                    $intId = current(array_keys($arySalary));
-                }
+            if($dateYM) {
                 $objEntity = $this->Salary->find()
-                    ->where(['id' => $intId, 'user_id'=> self::$m_aryUser['id']])->first();
+                    ->where(['date_y_m' => $dateYM, 'user_id'=> self::$m_aryUser['id']])->first();
             }
         }
 
         $this->set('objEntity', $objEntity);
         $this->set('arySalary', $arySalary);
+        $this->set('dateYM', $dateYM);
     }
 }

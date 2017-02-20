@@ -7,9 +7,6 @@
             <li>
                 <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">New</a>
             </li>
-            <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/salary') ?>">Salary</a>
-            </li>
         </ul>
     </div>
     <div class="panel-body">
@@ -47,7 +44,10 @@
                                 <?php if(isset($arySalary[$strDataKey]) && ($aryValue = $arySalary[$strDataKey])): ?>
 
                                     <div class="col-xs-7 text-right">
-                                        <strong><i>[ D ]</i>
+                                        <strong>
+                                            <a href="<?= $this->Url->build('/daily/salary/' . urlencode($strDataKey)) ?>">
+                                                <i>[ D ]</i>
+                                            </a>
                                             <?= $this->Number->format($arySalary[$strDataKey]['default_value'], [
                                                 'places' => 0,
                                                 'before' => '',
@@ -79,7 +79,10 @@
                                     </div>
 
                                     <div class="col-xs-7 text-right">
-                                        <strong><i>[ R ]</i>
+                                        <strong>
+                                            <a href="<?= $this->Url->build('/daily/salary/' . urlencode($strDataKey)) ?>">
+                                                <i>[ R ]</i>
+                                            </a>
                                             <?= $this->Number->format($arySalary[$strDataKey]['real_value'], [
                                                 'places' => 0,
                                                 'before' => '',

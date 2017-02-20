@@ -46,9 +46,6 @@
                 <a href="#"><i class="fa fa-users fa-lg"></i>&nbsp&nbspDaily<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?= $this->Url->build('/daily/salary') ?>">Salary</a>
-                    </li>
-                    <li>
                         <a href="<?= $this->Url->build('/daily/index') ?>">List</a>
                     </li>
                     <li>

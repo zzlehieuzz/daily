@@ -1,5 +1,5 @@
 <?php use App\Libs\Constant; ?>
-<?= $this->assign('title', 'ログイン画面') ?>
+<?= $this->assign('title', 'Login') ?>
 
 <div class="login-panel panel panel-default">
     <div class="panel-heading">
