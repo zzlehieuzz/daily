@@ -9,7 +9,7 @@
                 <ul class="nav nav-second-level collapse in">
                     <li>
                         <a href="<?= $this->Url->build('/admin/profile') ?>">
-                            <i class="fa fa-user-md fa-lg"></i>&nbsp&nbsp
+                            <i class="fa fa-user-md"></i>&nbsp&nbsp
                             <?php if(isset($user['name'])): ?>
                                 <strong>[ <?= $user['name'] ?> ]</strong>
                             <?php endif; ?> profile
@@ -18,14 +18,14 @@
                     <?php if(isset($user['role']) && $user['role'] == Constant::C_USER_ROLE_SUPER): ?>
                         <li>
                             <a href="<?= $this->Url->build('/Tool/index') ?>">
-                                <i class="fa fa-keyboard-o fa-lg"></i>&nbsp&nbspTool
+                                <i class="fa fa-keyboard-o"></i>&nbsp&nbspTool
                             </a>
                         </li>
                     <?php endif; ?>
                     <li class="divider"></li>
                     <li>
                         <a href="<?= $this->Url->build('/auth/logout') ?>">
-                            <i class="fa fa-sign-out fa-lg"></i>&nbsp&nbspLogout
+                            <i class="fa fa-sign-out"></i>&nbsp&nbspLogout
                         </a>
                     </li>
                 </ul>
