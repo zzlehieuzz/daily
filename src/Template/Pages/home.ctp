@@ -1,6 +1,5 @@
 <div class="intro-header">
     <div class="container">
-
         <div class="row">
             <div class="col-lg-12">
                 <div class="intro-message">
@@ -9,26 +8,14 @@
                     <hr class="intro-divider">
                     <ul class="list-inline intro-social-buttons">
                         <li>
-                            <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                        </li>
-                        <li>
                             <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-
     </div>
-    <!-- /.container -->
-
 </div>
-<!-- /.intro-header -->
-
-<!-- Page Content -->
 
 <a  name="services"></a>
 <div class="content-section-a">
@@ -47,15 +34,10 @@
         </div>
 
     </div>
-    <!-- /.container -->
-
 </div>
-<!-- /.content-section-a -->
 
 <div class="content-section-b">
-
     <div class="container">
-
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                 <hr class="section-heading-spacer">
@@ -67,17 +49,11 @@
                 <img class="img-responsive" src="img/dog.png" alt="">
             </div>
         </div>
-
     </div>
-    <!-- /.container -->
-
 </div>
-<!-- /.content-section-b -->
 
 <div class="content-section-a">
-
     <div class="container">
-
         <div class="row">
             <div class="col-lg-5 col-sm-6">
                 <hr class="section-heading-spacer">
@@ -91,35 +67,4 @@
         </div>
 
     </div>
-    <!-- /.container -->
-
-</div>
-<!-- /.content-section-a -->
-
-<a  name="contact"></a>
-<div class="banner">
-
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-6">
-                <h2>Connect to Start Bootstrap:</h2>
-            </div>
-            <div class="col-lg-6">
-                <ul class="list-inline banner-social-buttons">
-                    <li>
-                        <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-
 </div>
