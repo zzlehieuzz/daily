@@ -7,6 +7,11 @@
                 </a>
             </li>
             <li>
+                <a class="btn btn-default" href="<?= $this->Url->build('/users/index') ?>">
+                    <i class="fa fa-list fa-lg"></i>
+                </a>
+            </li>
+            <li>
                 <a class="btn btn-default" href="<?= $this->Url->build('/auth/logout') ?>">
                     <i class="fa fa-sign-out fa-lg"></i>
                 </a>

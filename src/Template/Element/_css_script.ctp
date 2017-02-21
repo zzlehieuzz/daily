@@ -1,7 +1,7 @@
 <?php $time = time(); ?>
 
-<?= $this->Html->css('bootstrap.min.css') ?>
-<?= $this->Html->css('bootstrap-datetimepicker.min.css') ?>
+<?= $this->Html->css('bootstrap/admin.bootstrap.min.css') ?>
+<?= $this->Html->css('bootstrap/bootstrap-datetimepicker.min.css') ?>
 <?= $this->Html->css('metisMenu.min.css') ?>
 <?= $this->Html->css('sb-admin-2.css?v=' . $time) ?>
 <?= $this->Html->css('font-awesome.min.css') ?>

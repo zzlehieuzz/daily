@@ -1,47 +1,53 @@
 <?php use App\Libs\Constant; ?>
-<div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="<?= $this->Url->build('/' . implode('/', Constant::$C_ROUTE_DEFAULT)); ?>">
-        <?= Constant::C_TITLE ?>
-    </a>
-</div>
+<?php use Cake\Routing\Router; ?>
 
-<ul class="nav navbar-top-links navbar-right">
-    <li class="dropdown">
-        <a href="<?= $this->Url->build('/pages/home') ?>">
-            <i class="fa fa-home fa-lg"></i>&nbsp&nbspHome
-        </a>
-    </li>
-    <?php if(isset($user) && $user): ?>
-        <li>
-            <a href="#">
-                <i class="fa fa-dashboard fa-lg"></i>&nbsp&nbspDashboard<span class="fa arrow"></span>
+<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+    <div class="container topnav">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand topnav"  href="<?= Router::url(Constant::$C_ROUTE_DEFAULT) ?>">
+                <?= Constant::C_TITLE ?>
             </a>
-            <ul class="dropdown-menu dropdown-user">
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <?php if(isset($user)): ?>
+                    <li>
+                        <a href="<?= Router::url(Constant::$C_ROUTE_LOGIN_REDIRECT); ?>">
+                            <i class="fa fa-dashboard"></i>&nbsp&nbspDashboard
+                        </a>
+                    </li>
+                <?php endif;?>
                 <li>
-                    <a href="<?= $this->Url->build('/admin/profile') ?>">
-                        <i class="fa fa-user fa-lg"></i>&nbsp&nbsp
-                        <?php if(isset($user['name'])): ?>
-                            <strong>[ <?= $user['name'] ?> ]</strong>
-                        <?php endif; ?> profile
-                    </a>
+                    <a href="#about">About</a>
                 </li>
-                <li class="divider"></li>
                 <li>
-                    <a href="<?= $this->Url->build('/auth/logout') ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <a href="#services">Services</a>
                 </li>
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
+                <?php if(isset($user)): ?>
+                    <li>
+                        <a href="<?= $this->Url->build('/auth/logout') ?>">
+                            <i class="fa fa-sign-out"></i>&nbsp&nbspLogout
+                        </a>
+                    </li>
+                <?php else:?>
+                    <li>
+                        <a href="<?= Router::url(Constant::$C_ROUTE_LOGIN) ?>">
+                            <i class="fa fa-sign-in"></i>&nbsp&nbspLogin
+                        </a>
+                    </li>
+                <?php endif?>
             </ul>
-        </li>
-    <?php else: ?>
-        <li>
-            <a href="<?= $this->Url->build('/auth/login') ?>">
-                <i class="fa fa-sign-in fa-lg"></i>&nbsp&nbspLogin
-            </a>
-        </li>
-    <?php endif; ?>
-</ul>
+        </div>
+    </div>
+</nav>

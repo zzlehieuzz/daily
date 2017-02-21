@@ -1,9 +1,9 @@
-<?= $this->Html->script('../libs/vendor/flot/excanvas.min.js') ?>
-<?= $this->Html->script('../libs/vendor/flot/jquery.flot.js') ?>
-<?= $this->Html->script('../libs/vendor/flot/jquery.flot.pie.js') ?>
-<?= $this->Html->script('../libs/vendor/flot/jquery.flot.resize.js') ?>
-<?= $this->Html->script('../libs/vendor/flot/jquery.flot.time.js') ?>
-<?= $this->Html->script('../libs/vendor/flot-tooltip/jquery.flot.tooltip.min.js') ?>
+<?= $this->Html->script('flot/excanvas.min.js') ?>
+<?= $this->Html->script('flot/jquery.flot.js') ?>
+<?= $this->Html->script('flot/jquery.flot.pie.js') ?>
+<?= $this->Html->script('flot/jquery.flot.resize.js') ?>
+<?= $this->Html->script('flot/jquery.flot.time.js') ?>
+<?= $this->Html->script('flot-tooltip/jquery.flot.tooltip.min.js') ?>
 
 <?= $this->Html->script('tool/index.js') ?>
 <?= $this->Html->css('tool/index.css') ?>

@@ -11,34 +11,31 @@
                 <?= $this->Form->input('username', ['type' => 'hidden']); ?>
                 <?= $this->Form->input('id', ['type' => 'hidden']); ?>
             <?php else : ?>
-                <label class="col-sm-2 control-label"><strong>Username <span class="text-danger">(*)</span></strong></label>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                     <?= $this->Form->input('username', [
                         'label' => FALSE,
                         'required' => FALSE,
                         'error' => FALSE,
                         'class' => 'form-control',
-                        'placeholder' => 'Please enter within 20 characters',
+                        'placeholder' => 'Please enter Username within 20 characters',
                         'maxlength' => 20]); ?>
                 </div>
             <?php endif; ?>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label"><strong>Name <span class="text-danger">(*)</span></strong></label>
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <?= $this->Form->input('name', [
                     'error' => FALSE,
                     'required' => FALSE,
                     'label' => FALSE,
                     'class' => 'form-control',
-                    'placeholder' => 'Please enter within 50 characters',
+                    'placeholder' => 'Please enter name within 50 characters',
                     'maxlength' => 50
                 ]); ?>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label"><strong>Role</strong></label>
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <?= $this->Form->input('role', array(
                     'templates' => ['inputContainer' => '{{content}}'],
                     'type' => 'select',
@@ -50,28 +47,26 @@
         </div>
         <?php if ($action === 'edit') : ?>
             <div class="form-group">
-                <label class="col-sm-2 control-label"><strong>New PW</strong></label>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                     <?= $this->Form->input('password', [
                         'error' => FALSE,
                         'required' => FALSE,
                         'label' => FALSE,
                         'class' => 'form-control',
-                        'placeholder' => 'Please enter within 20 characters',
+                        'placeholder' => 'Please enter new PW within 20 characters',
                         'maxlength' => 20
                     ]); ?>
                 </div>
             </div>
         <?php else : ?>
             <div class="form-group">
-                <label class="col-sm-2 control-label"><strong>PW <span class="text-danger">(*)</span></strong></label>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                     <?= $this->Form->input('password', [
                         'error' => FALSE,
                         'required' => FALSE,
                         'label' => FALSE,
                         'class' => 'form-control',
-                        'placeholder' => 'Please enter within 20 characters',
+                        'placeholder' => 'Please enter PW within 20 characters',
                         'maxlength' => 20
                     ]); ?>
                 </div>
