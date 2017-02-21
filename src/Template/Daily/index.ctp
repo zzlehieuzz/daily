@@ -9,7 +9,7 @@
             </li>
             <li>
                 <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">
-                    <i class="fa fa-trash fa-lg"></i>
+                    <i class="fa fa-plus-square fa-lg"></i>
                 </a>
             </li>
         </ul>

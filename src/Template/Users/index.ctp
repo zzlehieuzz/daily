@@ -27,7 +27,9 @@
                         <th width="25%">username</th>
                         <th>name</th>
                         <th width="25%">login</th>
-                        <th width="5%"><i class="fa fa-th-list"></i></th>
+                        <th width="5%" class="text-center">
+                            <i class="fa fa-th-list"></i>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,7 +42,7 @@
                                 <td><?= h($objUserItem->name) ?></td>
                                 <td><?= h($objUserItem->login_date) ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-warning btn-circle s-popup-del" func="delUser(<?= $objUserItem->id ?>)">
+                                    <button type="button" class="btn btn-danger btn-circle s-popup-del" func="delUser(<?= $objUserItem->id ?>)">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </td>
