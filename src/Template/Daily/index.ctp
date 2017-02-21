@@ -1,11 +1,16 @@
+<?= $this->Html->css('daily/index.css') ?>
 <div class="panel panel-default">
     <div class="panel-heading">
         <ul class="nav nav-pills btn-sm">
             <li>
-                <a class="btn btn-primary" href="<?= $this->Url->build('/daily/index') ?>">List</a>
+                <a class="btn btn-primary" href="<?= $this->Url->build('/daily/index') ?>">
+                    <i class="fa fa-list fa-lg"></i>
+                </a>
             </li>
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">New</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">
+                    <i class="fa fa-trash fa-lg"></i>
+                </a>
             </li>
         </ul>
     </div>

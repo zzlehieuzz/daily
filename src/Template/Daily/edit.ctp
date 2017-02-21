@@ -4,13 +4,19 @@
     <div class="panel-heading">
         <ul class="nav nav-pills btn-sm">
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/index') ?>">List</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/index') ?>">
+                    <i class="fa fa-list fa-lg"></i>
+                </a>
             </li>
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">New</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">
+                    <i class="fa fa-plus-square fa-lg"></i>
+                </a>
             </li>
             <li>
-                <a class="btn btn-primary" href="<?= $this->Url->build("/daily/edit/$strDateYM/$intCategory") ?>">Edit</a>
+                <a class="btn btn-primary" href="<?= $this->Url->build("/daily/edit/$strDateYM/$intCategory") ?>">
+                    <i class="fa fa-pencil fa-lg"></i>
+                </a>
             </li>
         </ul>
     </div>
@@ -68,7 +74,9 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12 text-right">
-                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-save fa-lg"></i>
+                            </button>
                         </div>
                     </div>
                 <?= $this->Form->end(); ?>
@@ -84,8 +92,8 @@
                 <button type="button" id="daily-load" class="btn btn-success btn-circle">
                     <i class="fa fa-link"></i>
                 </button>
-                <button type="button" id="daily-delete" class="btn btn-warning btn-circle">
-                    <i class="fa fa-times"></i>
+                <button type="button" id="daily-delete" class="btn btn-danger btn-circle">
+                    <i class="fa fa-trash"></i>
                 </button>
             </th>
             <th>category</th>
@@ -111,9 +119,9 @@
                     <?php $intAmount += $aryDataItem->amount ?>
                 </tr>
             <?php endforeach; ?>
-            <tr class="">
+            <tr class="alert alert-danger">
                 <td align="right" colspan="2"><strong>Total</strong></td>
-                <td colspan="1" class="alert alert-danger">
+                <td colspan="1">
                     <strong>
                         <?= $this->Number->format($intAmount, [
                             'places' => 0,

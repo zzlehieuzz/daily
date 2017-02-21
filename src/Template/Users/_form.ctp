@@ -80,10 +80,16 @@
         <div class="form-group">
             <div class="col-sm-12 text-right">
                 <?php if ($action === 'edit'): ?>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="checkToDelete(this);">Remove</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="checkToDelete(this);">
+                        <i class="fa fa-trash fa-lg"></i>
+                    </button>
                 <?php endif; ?>
-                <button type="reset" class="btn btn-warning btn-sm btn-create">Reset</button>
-                <button type="submit" class="btn btn-primary btn-sm btn-create">Save</button>
+                <button type="reset" class="btn btn-warning btn-sm btn-create">
+                    <i class="fa fa-repeat fa-lg"></i>
+                </button>
+                <button type="submit" class="btn btn-primary btn-sm btn-create">
+                    <i class="fa fa-save fa-lg"></i>
+                </button>
             </div>
         </div>
     <?= $this->Form->end(); ?>

@@ -2,10 +2,14 @@
     <div class="panel-heading">
         <ul class="nav nav-pills btn-sm">
             <li>
-                <a class="btn btn-primary" href="<?= $this->Url->build('/admin/profile') ?>">Profile</a>
+                <a class="btn btn-primary" href="<?= $this->Url->build('/admin/profile') ?>">
+                    <i class="fa fa-user-md fa-lg"></i>
+                </a>
             </li>
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/auth/logout') ?>">Logout</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/auth/logout') ?>">
+                    <i class="fa fa-sign-out fa-lg"></i>
+                </a>
             </li>
         </ul>
     </div>

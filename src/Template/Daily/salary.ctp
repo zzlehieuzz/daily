@@ -4,10 +4,19 @@
     <div class="panel-heading">
         <ul class="nav nav-pills btn-sm">
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/index') ?>">List</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/index') ?>">
+                    <i class="fa fa-list fa-lg"></i>
+                </a>
             </li>
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">New</a>
+                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">
+                    <i class="fa fa-plus-square fa-lg"></i>
+                </a>
+            </li>
+            <li>
+                <a class="btn btn-primary" href="<?= $this->Url->build('/daily/salary') ?>">
+                    <i class="fa fa-bank fa-lg"></i>
+                </a>
             </li>
         </ul>
     </div>
@@ -48,8 +57,12 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12 text-right">
-                            <button type="reset" class="btn btn-warning btn-sm btn-create">Reset</button>
-                            <button type="submit" class="btn btn-primary btn-sm btn-create">Save</button>
+                            <button type="reset" class="btn btn-warning btn-sm btn-create">
+                                <i class="fa fa-repeat fa-lg"></i>
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-sm btn-create">
+                                <i class="fa fa-save fa-lg"></i>
+                            </button>
                         </div>
                     </div>
                     <?= $this->Form->end(); ?>
