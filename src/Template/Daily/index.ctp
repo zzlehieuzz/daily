@@ -25,7 +25,7 @@
                                     <?= $strDataKey ?>
                                 </a>
                             </div>
-                            <div id="collapse_<?= $strDataKey ?>" class="panel-body collapse in" style="min-height: 180px">
+                            <div id="collapse_<?= $strDataKey ?>" class="panel-body collapse in" style="min-height: 195px">
                                 <?php $intAmount = 0; ?>
                                 <?php foreach ($aryCategory as $aryCategoryKey => $aryCategoryItem): ?>
                                     <?php if (isset($objDataItem[$aryCategoryKey])): ?>
