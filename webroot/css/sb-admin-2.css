@@ -9,26 +9,17 @@ body {
 #wrapper {
   width: 100%;
 }
-
-#page-wrapper, #page-wrapper-user {
-  padding: 0 10px;
+#page-wrapper {
+  padding: 0 15px;
   min-height: 568px;
   background-color: white;
 }
-
 @media (min-width: 768px) {
-  #page-wrapper, #page-wrapper-user {
+  #page-wrapper {
     position: inherit;
+    margin: 0 0 0 250px;
     padding: 0 30px;
     border-left: 1px solid #e7e7e7;
-  }
-
-  #page-wrapper {
-    margin: 0 0 0 250px;
-  }
-
-  #page-wrapper-user {
-    /*margin: 0 auto;*/
   }
 }
 .navbar-top-links {
