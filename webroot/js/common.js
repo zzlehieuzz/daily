@@ -3,12 +3,9 @@ $(function () {
         processPage();
     });
 
-    //$('a[href]:not([href^="#"], [href=""])').click(function(){
-    $('a[href]:not([href^="#"], [href=""])').on('click',function(e){
+    $('a[href]:not([href^="#"], [href=""])').click(function(){
         processPage();
     });
-
-    $("#header-text").text($("#title-header").text());
 
     $('#popup-confirm #btn-popup-confirm-yes').click(function() {
         var func = $(this).attr('func');
@@ -46,7 +43,6 @@ function clearPopupConfirm(name) {
         .removeAttr('func');
 }
 
-// AJAXのGETリクエスト
 function apiLoad(requestPath, params, callBackFunc, obj) {
     var error500 = $('#error-url').attr('error-500');
     $.getJSON(requestPath, params, function (data, textStatus, jqXHR) {
@@ -62,7 +58,6 @@ function apiLoad(requestPath, params, callBackFunc, obj) {
     });
 }
 
-// AJAXのPOSTリクエスト
 function apiPost(requestPath, params, callBackFunc, obj) {
     var error500 = $('#error-url').attr('error-500');
     $.post(requestPath, params, function (data, textStatus, jqXHR) {
@@ -78,7 +73,6 @@ function apiPost(requestPath, params, callBackFunc, obj) {
     });
 }
 
-// DataのPOSTリクエスト
 function apiPostData(requestPath, params, callBackFunc, obj) {
     var error500 = $('#error-url').attr('error-500');
     $.ajax({
@@ -109,14 +103,12 @@ function apiPostData(requestPath, params, callBackFunc, obj) {
     });
 }
 
-// ポップアップメッセージを表示する
 function openPopupAlert(msg, name) {
     name = typeof name !== 'undefined' && name ? name : '#popup-normal-alert';
     $(name).find('#msg').text(msg);
     $(name).modal('show');
 }
 
-// ポップアップ確認メッセージを表示する
 function openPopupConfirm(msg, name) {
     name = typeof name !== 'undefined' && name ? name : '#popup-confirm';
     $(name).find('#msg').text(msg);
@@ -148,7 +140,6 @@ function disableProcessPage() {
     $('#process-content').modal('hide');
 }
 
-// escapeHTML文字
 function escapeHtml(text) {
     'use strict';
     return text.replace(/[\"&'\/<>]/g, function (a) {
