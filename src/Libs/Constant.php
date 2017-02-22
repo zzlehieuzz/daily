@@ -14,7 +14,7 @@ class Constant
 {
 
     // ページのタイトル
-    const C_TITLE = 'Daily';
+    const C_TITLE = 'MAINICHI';
     // ログインコントローラー定義
     static $C_ROUTE_DEFAULT = ['controller' => 'Pages', 'action' => 'home'];
     static $C_ROUTE_LOGIN = ['controller' => 'Auth', 'action' => 'login'];

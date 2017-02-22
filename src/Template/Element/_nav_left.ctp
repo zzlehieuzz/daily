@@ -24,11 +24,6 @@
                     <?php endif; ?>
                     <li class="divider"></li>
                     <li>
-                        <a href="<?= $this->Url->build('/pages/home') ?>">
-                            <i class="fa fa-home"></i>&nbsp&nbspHome
-                        </a>
-                    </li>
-                    <li>
                         <a href="<?= $this->Url->build('/auth/logout') ?>">
                             <i class="fa fa-sign-out"></i>&nbsp&nbspLogout
                         </a>

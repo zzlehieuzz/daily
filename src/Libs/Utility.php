@@ -85,6 +85,11 @@ class Utility
         return $strCurrent . '-' . str_pad($strUketukeNo, 3, '0', STR_PAD_LEFT);
     }
 
+    public static function slidePath($strName)
+    {
+        return 'slides/' . $strName;
+    }
+
     /**
      * 唯一ファイル名を作成する
      *

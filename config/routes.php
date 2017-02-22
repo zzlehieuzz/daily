@@ -44,7 +44,7 @@ use Cake\Routing\Router;
 Router::defaultRouteClass('DashedRoute');
 
 Router::scope('/', function (RouteBuilder $routes) {
-    $routes->connect('/', Constant::$C_ROUTE_DEFAULT);
+    $routes->connect('/', Constant::$C_ROUTE_LOGIN);
 
     /**
      * Connect catchall routes for all controllers.

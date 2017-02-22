@@ -1,6 +1,39 @@
+<?php use App\Libs\Utility; ?>
 <div class="intro-header">
     <div class="container">
         <div class="row">
+            <div class="col-lg-12">
+                <div class="row carousel-holder">
+
+                    <div class="col-md-12">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <?= $this->Html->image(Utility::slidePath('slide1.jpg'), ['class' => 'slide-image']); ?>
+                                </div>
+                                <div class="item">
+                                    <?= $this->Html->image(Utility::slidePath('slide2.jpg'), ['class' => 'slide-image']); ?>
+                                </div>
+                                <div class="item">
+                                    <?= $this->Html->image(Utility::slidePath('slide3.jpg'), ['class' => 'slide-image']); ?>
+                                </div>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <div class="col-lg-12">
                 <div class="intro-message">
                     <h1>Landing Page</h1>
