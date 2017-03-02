@@ -1,8 +1,7 @@
-<?php use App\Libs\Constant; ?>
 <!DOCTYPE html>
 <html lang="ja">
     <head>
-        <title><?= Constant::C_TITLE ?></title>
+        <title><?= $this->fetch('title'); ?></title>
 
         <?= $this->element('_meta'); ?>
         <?= $this->element('_css_script'); ?>

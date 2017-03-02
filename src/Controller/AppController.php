@@ -94,27 +94,31 @@ class AppController extends Controller
      */
     public function beforeFilter(Event $event) {
         parent::beforeFilter($event);
-        $aryUser = $this->Auth->user();
 
-        $arySelectField = [
-            'id' => 'Users.id'
-            ,'username' => 'Users.username'
-            ,'password' => 'Users.password'
-            ,'name' => 'Users.name'
-            ,'role' => 'Users.role'
-            ,'login_date' => 'Users.login_date'
-            ,'currency' => 'Config.currency_value'
-        ];
-
-        $aryUser = $this->Users->find()
-            ->select($arySelectField)
-            ->where(['Users.id' => $aryUser['id']])
-            ->contain(['Config'])->first();
-
+        //controller create self::$m_strControllerName
         if(isset($this->request->params['controller']) === TRUE) {
             self::$m_strControllerName = $this->request->params['controller'];
         }
-        if (is_null($aryUser) == FALSE) {
+
+        $aryAuthUser = $this->Auth->user();
+        $aryUser = null;
+        if($aryAuthUser) {
+            $arySelectField = [
+                'id' => 'Users.id'
+                ,'username' => 'Users.username'
+                ,'password' => 'Users.password'
+                ,'name' => 'Users.name'
+                ,'role' => 'Users.role'
+                ,'login_date' => 'Users.login_date'
+                ,'currency' => 'Config.currency_value'
+            ];
+            $aryUser = $this->Users->find()
+                ->select($arySelectField)
+                ->where(['Users.id' => $aryAuthUser['id']])
+                ->contain(['Config'])->first();
+        }
+
+        if (!is_null($aryUser)) {
             self::$m_aryUser = $aryUser->toArray();
             $this->set('user', self::$m_aryUser);
         } else if($this->Auth->isAuthorized()) {
