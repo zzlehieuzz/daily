@@ -25,6 +25,7 @@
             </div>
         </div>
         <?= $this->element('_popup'); ?>
+        <input id="data-currency" type="hidden" value='<?= \App\Libs\Constant::$C_USER_CURRENCY[$user['currency']]; ?>'/>
         <div id="process-content" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog"></div>
     </body>
 </html>

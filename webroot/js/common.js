@@ -150,6 +150,19 @@ function escapeHtml(text) {
     });
 }
 
+function moneyFormat(value) {
+    var currencyType = $('#data-currency').val();
+    //if(val == '¥' && v >= 100 && v < 1000) {
+    //    return val + " " + v.toString().replace("0000", "百");
+    //} else if(val == '¥' && v >= 1000 && v < 10000) {
+    //        return val + " " + v.toString().replace("0000", "千");
+    //}  else if(val == '¥' && v >= 10000 && v < 100000) {
+    //        return val + " " + v.toString().replace("0000", "万");
+    //} else {
+        return accounting.formatMoney(value, currencyType + " ", 0);
+    //}
+}
+
 function pr(msg) {
     console.log(msg);
 }

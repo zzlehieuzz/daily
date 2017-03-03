@@ -12,5 +12,6 @@
 <?= $this->Html->script('moment-with-locales.min.js') ?>
 <?= $this->Html->script('bootstrap-datetimepicker.min.js') ?>
 <?= $this->Html->script('metisMenu.min.js') ?>
+<?= $this->Html->script('accounting.min.js') ?>
 <?= $this->Html->script('sb-admin-2.js?v=' . $time) ?>
 <?= $this->Html->script('common.js?v=' . $time) ?>
