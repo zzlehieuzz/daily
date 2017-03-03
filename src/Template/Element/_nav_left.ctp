@@ -15,6 +15,11 @@
                             <?php endif; ?> profile
                         </a>
                     </li>
+                    <li>
+                        <a href="<?= $this->Url->build('/admin/setting') ?>">
+                            <i class="fa fa-gear"></i>&nbsp&nbspSetting
+                        </a>
+                    </li>
                     <?php if(isset($user['role']) && $user['role'] == Constant::C_USER_ROLE_SUPER): ?>
                         <li>
                             <a href="<?= $this->Url->build('/Tool/index') ?>">
@@ -51,6 +56,23 @@
                     </li>
                     <li>
                         <a href="<?= $this->Url->build('/daily/add') ?>">New</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-bar-chart fa-lg"></i>&nbsp&nbspGraph<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="<?= $this->Url->build('/graph/index') ?>">Chart</a>
+                    </li>
+                    <li>
+                        <a href="<?= $this->Url->build('/graph/group') ?>">Group</a>
+                    </li>
+                    <li>
+                        <a href="<?= $this->Url->build('/graph/calendar') ?>">Calendar</a>
+                    </li>
+                    <li>
+                        <a href="<?= $this->Url->build('/graph/output') ?>">Output</a>
                     </li>
                 </ul>
             </li>

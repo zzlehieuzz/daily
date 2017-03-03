@@ -10,6 +10,8 @@
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 namespace App\Libs;
 
+use DateTime;
+
 class Utility
 {
     /**
@@ -114,5 +116,10 @@ class Utility
         . '_'
         . str_pad($intFileKey + 1, 3, '0', STR_PAD_LEFT)
         . $strExt;
+    }
+
+    static public function getTimestampFrom($date) {
+        $date = new DateTime($date);
+        return $date->getTimestamp() . '000';
     }
 }

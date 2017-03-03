@@ -37,36 +37,6 @@ class ToolController extends AppController
         $intCountUser = $this->Users->find()->count();
         $this->set('intCountDaily', $intCountDaily);
         $this->set('intCountUser', $intCountUser);
-
-
-        $aryField = [
-            'date_y_m' => 'date_y_m',
-            'amount' => 'SUM(amount)'
-        ];
-        $aryDaily = $this->Daily->find('list', [
-            'keyField' => 'date_y_m',
-            'valueField' => 'amount',
-            'order' => ['date_y_m' => 'DESC']])
-            ->group(['date_y_m'])
-            ->select($aryField)
-            ->where(['user_id' => self::$m_aryUser['id']])
-            ->toArray();
-        $aryDailyPercent = [];
-        $intAmountTotal = 0;
-        if($aryDaily) {
-            $intAmountTotal = array_sum($aryDaily);
-            $intI = 0;
-            foreach($aryDaily as $aryDailyKey => $aryDailyItem) {
-                $aryDailyPercent[$intI]['label'] = $aryDailyKey;
-                $aryDailyPercent[$intI]['data']  = ($aryDailyItem/$intAmountTotal)*100;
-                $intI++;
-            }
-        }
-
-        $this->set('aryDailyPercent', $aryDailyPercent);
-        $this->set('intAmountTotal', $intAmountTotal);
-
-
     }
 
     public function clearTemp()
@@ -84,5 +54,9 @@ class ToolController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function setting() {
+
     }
 }

@@ -1,13 +1,3 @@
-<?= $this->Html->script('flot/excanvas.min.js') ?>
-<?= $this->Html->script('flot/jquery.flot.js') ?>
-<?= $this->Html->script('flot/jquery.flot.pie.js') ?>
-<?= $this->Html->script('flot/jquery.flot.resize.js') ?>
-<?= $this->Html->script('flot/jquery.flot.time.js') ?>
-<?= $this->Html->script('flot-tooltip/jquery.flot.tooltip.min.js') ?>
-
-<?= $this->Html->script('tool/index.js') ?>
-<?= $this->Html->css('tool/index.css') ?>
-
 <div class="col-lg-6">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -31,17 +21,3 @@
         </div>
     </div>
 </div>
-
-<div class="col-lg-6">
-    <div class="panel panel-default">
-        <div class="panel-heading">Pie Chart</div>
-        <div class="panel-body">
-            <div class="flot-chart">
-                <div class="flot-chart-content" id="flot-pie-chart"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<input id="data-percent" type="hidden" value='<?= json_encode($aryDailyPercent); ?>'/>
-<input id="data-amount-total" type="hidden" value='<?= $intAmountTotal; ?>'/>
