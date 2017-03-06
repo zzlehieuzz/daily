@@ -37,3 +37,15 @@ msgstr "Group"
 
 msgid "Calendar"
 msgstr "Calendar"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Sign in to"
+msgstr "Sign in to %s"
+
+msgid "Nickname"
+msgstr "Nickname"
+
+msgid "Password"
+msgstr "Password"

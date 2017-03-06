@@ -68,6 +68,7 @@ class AppController extends Controller
             'authorize'      => ['Controller']
         ]);
 
+        $strLang = 'en_US';
         $strLang = 'ja_JP';
         if($strLang && isset(Constant::$localeMap[$strLang])) {
             I18n::locale(Constant::$localeMap[$strLang]);

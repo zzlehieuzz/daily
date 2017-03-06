@@ -37,3 +37,15 @@ msgstr "グループ"
 
 msgid "Calendar"
 msgstr "カレンダー"
+
+msgid "Login"
+msgstr "ログイン"
+
+msgid "Sign in to"
+msgstr "%sにサインインする"
+
+msgid "Nickname"
+msgstr "ニックネーム"
+
+msgid "Password"
+msgstr "パスワード"
