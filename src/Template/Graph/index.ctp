@@ -28,28 +28,43 @@
     <div class="panel-heading">
         <ul class="nav nav-pills btn-sm">
             <li>
-                <a class="btn btn-primary" href="<?= $this->Url->build('/daily/index') ?>">
+                <a class="btn btn-primary" href="<?= $this->Url->build("/graph/export/$pYear/$pMonth/$pType") ?>">
                     <i class="fa fa-cloud-download fa-lg"></i>
                 </a>
             </li>
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">
+                <?= $this->Form->input('list-year', [
+                    'type' => 'select',
+                    'class'=>'form-control',
+                    'default' => $pYear,
+                    'options' => $aryYear,
+                    'label' => FALSE,
+                ]); ?>
+            </li>
+            <?php if($pType == 'Y'): ?>
+                <?php $yearCls = 'primary' ?>
+                <?php $monthCls = 'default' ?>
+            <?php else: ?>
+                <?php $yearCls = 'default' ?>
+                <?php $monthCls = 'primary' ?>
+                <li>
+                    <?= $this->Form->input('list-month', [
+                        'type' => 'select',
+                        'class'=>'form-control',
+                        'default' => $pMonth,
+                        'options' => $aryMonth,
+                        'label' => FALSE,
+                    ]); ?>
+                </li>
+            <?php endif; ?>
+            <li>
+                <a class="btn btn-<?= $yearCls ?>" href="<?= $this->Url->build("/graph/index/$pYear/$pMonth/Y") ?>">
                     Year
                 </a>
             </li>
             <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">
+                <a class="btn btn-<?= $monthCls ?>" href="<?= $this->Url->build("/graph/index/$pYear/$pMonth/M") ?>">
                     Month
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">
-                    Week
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-default" href="<?= $this->Url->build('/daily/add') ?>">
-                    Day
                 </a>
             </li>
         </ul>
@@ -57,18 +72,6 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-6">
-        <div class="panel panel-info">
-            <div class="panel-heading">Bar Chart</div>
-            <div class="panel-body">
-                <div class="flot-chart">
-                    <div id="legend-container"></div>
-                    <div class="flot-chart-content" id="flot-bar-chart"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="col-lg-6">
         <div class="panel panel-info">
             <div class="panel-heading">Pie Chart</div>
@@ -82,6 +85,7 @@
 </div>
 
 <input id="pie-chart-data" type="hidden" value='<?= json_encode($aryDailyPercent); ?>'/>
-<input id="bar-chart-data" type="hidden" value='<?= json_encode($aryBarChart); ?>'/>
 <input id="data-amount-total" type="hidden" value='<?= $intAmountTotal; ?>'/>
-<input id="data-year" type="hidden" value='<?= $year; ?>'/>
+<input id="data-p-type" type="hidden" value='<?= $pType; ?>'/>
+<input id="data-p-month" type="hidden" value='<?= $pMonth; ?>'/>
+<input id="url-graph-index" type="hidden" value='<?= $this->Url->build('/graph/index/') ?>'/>

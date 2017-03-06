@@ -35,6 +35,8 @@ class Constant
 
     static $C_USER_CURRENCY = [1 => '¥', 'VND'];
 
+    const START_YEAR = 2016;
+
     // 日付フォーマット
     const C_YMD_BR_HI = "Y/m/d \n H:i";
     const C_YMD_HIS = 'Y/m/d H:i:s';

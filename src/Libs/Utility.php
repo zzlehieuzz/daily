@@ -122,4 +122,8 @@ class Utility
         $date = new DateTime($date);
         return $date->getTimestamp() . '000';
     }
+
+    static public function strPad($v) {
+        return str_pad($v, 2,'0',STR_PAD_LEFT);
+    }
 }
