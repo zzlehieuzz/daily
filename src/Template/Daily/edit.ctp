@@ -102,23 +102,9 @@
     </thead>
     <tbody>
         <?php if($aryData): ?>
-            <?php $intAmount = 0 ?>
-            <?php foreach ($aryData as $aryDataKey => $aryDataItem): ?>
-                <tr class="daily-row" row-id="<?= $aryDataItem->id ?>">
-                    <td><?= h($aryDataItem->date_process) ?></td>
-                    <td align="right"><?= $aryCategory[$aryDataItem->category_id] ?></td>
-                    <td>
-                        <?= $this->Number->format($aryDataItem->amount, [
-                            'places' => 0,
-                            'before' => \App\Libs\Constant::$C_USER_CURRENCY[$user['currency']] . ' ',
-                            'escape' => false,
-                            'decimals' => '.',
-                            'thousands' => ','
-                        ]) ?>
-                    </td>
-                    <?php $intAmount += $aryDataItem->amount ?>
-                </tr>
-            <?php endforeach; ?>
+            <?php $intAmount = array_sum(array_map(function($item) {
+                return $item['amount'];
+            }, $aryData)); ?>
             <tr class="alert alert-danger">
                 <td align="right" colspan="2"><strong>Total</strong></td>
                 <td colspan="1">
@@ -133,6 +119,21 @@
                     </strong>
                 </td>
             </tr>
+            <?php foreach ($aryData as $aryDataKey => $aryDataItem): ?>
+                <tr class="daily-row" row-id="<?= $aryDataItem->id ?>">
+                    <td><?= h($aryDataItem->date_process) ?></td>
+                    <td align="right"><?= $aryCategory[$aryDataItem->category_id] ?></td>
+                    <td>
+                        <?= $this->Number->format($aryDataItem->amount, [
+                            'places' => 0,
+                            'before' => \App\Libs\Constant::$C_USER_CURRENCY[$user['currency']] . ' ',
+                            'escape' => false,
+                            'decimals' => '.',
+                            'thousands' => ','
+                        ]) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         <?php else: ?>
             <tr>
                 <td colspan="3">No data</td>

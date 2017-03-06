@@ -136,7 +136,6 @@ class DailyController extends AppController
         if($intCategory) {
             $aryDaily->where(['category_id' => $intCategory]);
         }
-        $aryDaily->toArray();
 
         if($this->request->is('post')) {
             $aryData = $this->request->data;
@@ -163,7 +162,7 @@ class DailyController extends AppController
         }
 
         $this->set('objEntity', $objEntity);
-        $this->set('aryData', $aryDaily);
+        $this->set('aryData', $aryDaily->toArray());
         $this->set('aryCategory', $aryCategory);
         $this->set('strDateYM', $strDateYM);
         $this->set('intCategory', $intCategory);
