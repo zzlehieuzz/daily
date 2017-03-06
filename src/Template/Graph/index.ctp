@@ -59,12 +59,12 @@
             <?php endif; ?>
             <li>
                 <a class="btn btn-<?= $yearCls ?>" href="<?= $this->Url->build("/graph/index/$pYear/$pMonth/Y") ?>">
-                    Year
+                    Y
                 </a>
             </li>
             <li>
                 <a class="btn btn-<?= $monthCls ?>" href="<?= $this->Url->build("/graph/index/$pYear/$pMonth/M") ?>">
-                    Month
+                    M
                 </a>
             </li>
         </ul>

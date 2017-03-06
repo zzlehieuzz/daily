@@ -16,7 +16,9 @@ namespace App\Controller;
 
 use App\Libs\Constant;
 use Cake\Controller\Controller;
+use Cake\Core\Configure;
 use Cake\Event\Event;
+use Cake\I18n\I18n;
 use Cake\Network\Exception\NotFoundException;
 use Psr\Log\LogLevel;
 
@@ -65,6 +67,13 @@ class AppController extends Controller
             'storage'        => 'Session',
             'authorize'      => ['Controller']
         ]);
+
+        $strLang = 'ja_JP';
+        if($strLang && isset(Constant::$localeMap[$strLang])) {
+            I18n::locale(Constant::$localeMap[$strLang]);
+        } else {
+            I18n::locale(Configure::read('App.defaultLocale'));
+        }
 
         if ($this->Auth->user()
             && $this->request->params['controller'] == 'Auth'

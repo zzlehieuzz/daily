@@ -50,6 +50,10 @@ class Constant
     const C_OFF = FALSE;
     const C_ON = TRUE;
 
+    static $localeMap = [
+        'en_US' => 'en_US'
+        ,'ja_JP' => 'ja_JP'
+    ];
 
 
     // 指示種別の値

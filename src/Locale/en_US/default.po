@@ -1,0 +1,39 @@
+# title
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Tool"
+msgstr "Tool"
+
+msgid "Profile"
+msgstr "Profile"
+
+msgid "Setting"
+msgstr "Setting"
+
+msgid "Logout"
+msgstr "Logout"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "List"
+msgstr "List"
+
+msgid "New"
+msgstr "New"
+
+msgid "Daily"
+msgstr "Daily"
+
+msgid "Chart"
+msgstr "Chart"
+
+msgid "Year/Month"
+msgstr "Year/Month"
+
+msgid "Group"
+msgstr "Group"
+
+msgid "Calendar"
+msgstr "Calendar"

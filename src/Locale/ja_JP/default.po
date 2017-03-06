@@ -1,0 +1,39 @@
+# title
+msgid "Dashboard"
+msgstr "計器盤"
+
+msgid "Tool"
+msgstr "ツール"
+
+msgid "Profile"
+msgstr "プロフィール"
+
+msgid "Setting"
+msgstr "設定"
+
+msgid "Logout"
+msgstr "ログアウト"
+
+msgid "Users"
+msgstr "ユーザー"
+
+msgid "List"
+msgstr "一覧表"
+
+msgid "New"
+msgstr "新規"
+
+msgid "Daily"
+msgstr "毎日"
+
+msgid "Chart"
+msgstr "図表"
+
+msgid "Year/Month"
+msgstr "年月"
+
+msgid "Group"
+msgstr "グループ"
+
+msgid "Calendar"
+msgstr "カレンダー"
