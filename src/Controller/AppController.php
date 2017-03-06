@@ -77,8 +77,8 @@ class AppController extends Controller
         }
 
         if ($this->Auth->user()
-            && $this->request->params['controller'] == 'Auth'
-            && $this->request->params['action'] == 'login') {
+            && strtolower($this->request->params['controller']) == 'auth'
+            && strtolower($this->request->params['action']) == 'login') {
             return $this->redirect(Constant::$C_ROUTE_LOGIN_REDIRECT);
         }
 
